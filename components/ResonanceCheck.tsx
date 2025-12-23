@@ -17,69 +17,154 @@ const ResonanceCheck: React.FC = () => {
   const avg = Object.values(answers).reduce((a: number, b: number) => a + b, 0) / questions.length;
 
   return (
-    <div className="max-w-3xl mx-auto p-6 space-y-8">
-      <div className="text-center space-y-2">
-        <h2 className="text-3xl font-bold">Resonantie Check</h2>
-        <p className="text-slate-400">Meet je huidige afwijking van het optimale fractale pad.</p>
+    <div className="max-w-4xl mx-auto p-6 md:p-8 space-y-10">
+      {/* Header */}
+      <div className="text-center space-y-3 relative">
+        <div className="absolute inset-0 flex items-center justify-center opacity-5">
+          <svg width="250" height="250" viewBox="0 0 250 250" className="fractal-particle">
+            <circle cx="125" cy="125" r="100" fill="none" stroke="url(#resGold)" strokeWidth="1"/>
+            <circle cx="125" cy="125" r="70" fill="none" stroke="url(#resPurple)" strokeWidth="0.8"/>
+            <circle cx="125" cy="125" r="45" fill="none" stroke="url(#resGold)" strokeWidth="0.6"/>
+            <circle cx="125" cy="125" r="25" fill="none" stroke="url(#resPurple)" strokeWidth="0.4"/>
+            <defs>
+              <linearGradient id="resGold" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#fbbf24"/>
+                <stop offset="100%" stopColor="#f59e0b"/>
+              </linearGradient>
+              <linearGradient id="resPurple" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#a855f7"/>
+                <stop offset="100%" stopColor="#7c3aed"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <h2 className="text-4xl md:text-5xl font-display font-bold gradient-text relative z-10">Resonantie Check</h2>
+        <p className="text-purple-400/70 font-mono text-sm uppercase tracking-wider relative z-10">Meet je huidige afwijking van het optimale fractale pad</p>
       </div>
 
-      <div className="bg-slate-900 border border-slate-800 rounded-3xl p-8 space-y-10">
-        <div className="grid grid-cols-1 gap-8">
+      <div className="bg-gradient-to-br from-purple-950/40 via-indigo-950/40 to-slate-900/60 border border-purple-500/30 rounded-3xl p-8 md:p-10 space-y-10 luxury-glow-sm backdrop-blur-sm relative overflow-hidden">
+        {/* Fractal background decoration */}
+        <div className="absolute top-0 right-0 w-64 h-64 opacity-5 pointer-events-none">
+          <svg viewBox="0 0 200 200" className="w-full h-full fractal-particle" style={{animationDelay: '2s'}}>
+            <path d="M 100 10 L 190 100 L 100 190 L 10 100 Z" fill="none" stroke="url(#resGold)" strokeWidth="1"/>
+            <path d="M 100 40 L 160 100 L 100 160 L 40 100 Z" fill="none" stroke="url(#resPurple)" strokeWidth="0.8"/>
+            <path d="M 100 70 L 130 100 L 100 130 L 70 100 Z" fill="none" stroke="url(#resGold)" strokeWidth="0.6"/>
+          </svg>
+        </div>
+
+        <div className="grid grid-cols-1 gap-8 relative z-10">
           {questions.map(q => (
             <div key={q.id} className="space-y-4">
-              <label className="text-slate-200 font-medium block">{q.text}</label>
+              <label className="text-slate-200 font-medium block text-lg">{q.text}</label>
               <div className="flex items-center space-x-4">
-                <span className="text-xs text-slate-500 w-24 text-right">{q.low}</span>
+                <span className="text-xs text-purple-400/60 w-28 text-right font-mono">{q.low}</span>
                 <input
                   type="range"
                   min="0"
                   max="100"
                   value={answers[q.id]}
                   onChange={(e) => setAnswers(prev => ({ ...prev, [q.id]: parseInt(e.target.value) }))}
-                  className="flex-1 h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-indigo-600"
+                  className="flex-1 h-3 bg-slate-900/60 rounded-lg appearance-none cursor-pointer accent-gradient"
+                  style={{
+                    background: `linear-gradient(to right, 
+                      rgba(168, 85, 247, 0.3) 0%, 
+                      rgba(168, 85, 247, 0.3) ${answers[q.id]}%, 
+                      rgba(30, 41, 59, 0.6) ${answers[q.id]}%, 
+                      rgba(30, 41, 59, 0.6) 100%)`
+                  }}
                 />
-                <span className="text-xs text-slate-500 w-24 text-left">{q.high}</span>
+                <span className="text-xs text-amber-400/70 w-28 text-left font-mono">{q.high}</span>
               </div>
             </div>
           ))}
         </div>
 
-        <div className="pt-8 border-t border-slate-800 flex flex-col items-center">
-          <div className="relative w-48 h-48 flex items-center justify-center">
+        <div className="pt-10 border-t border-purple-500/20 flex flex-col items-center relative z-10">
+          <div className="relative w-64 h-64 flex items-center justify-center">
+            {/* Outer fractal circles */}
             <svg className="absolute inset-0 w-full h-full transform -rotate-90">
               <circle
-                cx="96"
-                cy="96"
-                r="88"
+                cx="128"
+                cy="128"
+                r="110"
                 fill="none"
-                stroke="#1e293b"
-                strokeWidth="8"
+                stroke="rgba(30, 41, 59, 0.6)"
+                strokeWidth="6"
               />
               <circle
-                cx="96"
-                cy="96"
-                r="88"
+                cx="128"
+                cy="128"
+                r="110"
                 fill="none"
-                stroke={avg > 50 ? '#4f46e5' : '#ef4444'}
-                strokeWidth="8"
-                strokeDasharray={552.92}
-                strokeDashoffset={552.92 * (1 - avg / 100)}
+                stroke={`url(#progressGradient${avg > 50 ? 'High' : 'Low'})`}
+                strokeWidth="6"
+                strokeDasharray={691.15}
+                strokeDashoffset={691.15 * (1 - avg / 100)}
                 className="transition-all duration-1000 ease-out"
+                strokeLinecap="round"
               />
+              {/* Inner fractal circles */}
+              <circle
+                cx="128"
+                cy="128"
+                r="80"
+                fill="none"
+                stroke="rgba(30, 41, 59, 0.4)"
+                strokeWidth="4"
+              />
+              <circle
+                cx="128"
+                cy="128"
+                r="80"
+                fill="none"
+                stroke={`url(#progressGradient${avg > 50 ? 'High' : 'Low'})`}
+                strokeWidth="4"
+                strokeDasharray={502.65}
+                strokeDashoffset={502.65 * (1 - avg / 100)}
+                className="transition-all duration-1200 ease-out"
+                strokeLinecap="round"
+              />
+              <defs>
+                <linearGradient id="progressGradientHigh" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#fbbf24"/>
+                  <stop offset="50%" stopColor="#a855f7"/>
+                  <stop offset="100%" stopColor="#3b82f6"/>
+                </linearGradient>
+                <linearGradient id="progressGradientLow" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#ef4444"/>
+                  <stop offset="100%" stopColor="#f59e0b"/>
+                </linearGradient>
+              </defs>
             </svg>
+            {/* Center fractal decoration */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <svg width="80" height="80" viewBox="0 0 80 80" className="opacity-20">
+                <circle cx="40" cy="40" r="35" fill="none" stroke="url(#resGold)" strokeWidth="0.5"/>
+                <circle cx="40" cy="40" r="25" fill="none" stroke="url(#resPurple)" strokeWidth="0.4"/>
+                <circle cx="40" cy="40" r="15" fill="none" stroke="url(#resGold)" strokeWidth="0.3"/>
+              </svg>
+            </div>
             <div className="text-center z-10">
-              <span className="text-5xl font-bold font-mono">{Math.round(avg)}%</span>
-              <p className="text-[10px] text-slate-500 uppercase tracking-widest mt-1">Flow Index</p>
+              <span className={`text-6xl font-bold font-mono ${avg > 70 ? 'gradient-text' : avg > 40 ? 'text-purple-400' : 'text-red-400'}`}>
+                {Math.round(avg)}%
+              </span>
+              <p className="text-[11px] text-purple-400/60 uppercase tracking-widest mt-2 font-mono">Flow Index</p>
             </div>
           </div>
 
-          <div className="mt-8 text-center max-w-md">
+          <div className="mt-10 text-center max-w-lg">
             {avg > 70 ? (
-              <p className="text-indigo-400 font-semibold italic">"Je resoneert sterk met het patroon. Behoud je koers via Wu Wei."</p>
+              <div className="bg-gradient-to-r from-amber-500/10 via-purple-500/10 to-blue-500/10 border border-amber-500/30 rounded-2xl p-6 luxury-glow-sm">
+                <p className="text-amber-400 font-semibold italic text-lg leading-relaxed">"Je resoneert sterk met het patroon. Behoud je koers via Wu Wei."</p>
+              </div>
             ) : avg > 40 ? (
-              <p className="text-slate-400 italic">"Er is lichte frictie merkbaar. Onderzoek waar je vrije wil probeert af te wijken van je Dharma."</p>
+              <div className="bg-gradient-to-r from-purple-500/10 to-indigo-500/10 border border-purple-500/30 rounded-2xl p-6 luxury-glow-sm">
+                <p className="text-purple-300 italic text-lg leading-relaxed">"Er is lichte frictie merkbaar. Onderzoek waar je vrije wil probeert af te wijken van je Dharma."</p>
+              </div>
             ) : (
-              <p className="text-red-400 font-semibold italic">"Hoge frictie gedetecteerd. Pas op voor de Elastische Correctie van Axioma 9. Laat de spanning vieren."</p>
+              <div className="bg-gradient-to-r from-red-500/10 to-orange-500/10 border border-red-500/30 rounded-2xl p-6 luxury-glow-sm">
+                <p className="text-red-400 font-semibold italic text-lg leading-relaxed">"Hoge frictie gedetecteerd. Pas op voor de Elastische Correctie van Axioma 9. Laat de spanning vieren."</p>
+              </div>
             )}
           </div>
         </div>

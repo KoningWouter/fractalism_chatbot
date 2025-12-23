@@ -3,6 +3,7 @@ export enum View {
   CHAT = 'chat',
   LIBRARY = 'library',
   RESONANCE_CHECK = 'resonance_check',
+  ABOUT_CONTACT = 'about_contact',
   ROSETTA_STONE = 'rosetta_stone'
 }
 

@@ -4,6 +4,7 @@ import { View } from './types';
 import ChatInterface from './components/ChatInterface';
 import AxiomLibrary from './components/AxiomLibrary';
 import ResonanceCheck from './components/ResonanceCheck';
+import AboutContact from './components/AboutContact';
 
 const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<View>(View.CHAT);
@@ -85,6 +86,7 @@ const App: React.FC = () => {
             <NavItem view={View.CHAT} label="Dialoog" icon="◈" />
             <NavItem view={View.LIBRARY} label="Bibliotheek" icon="◚" />
             <NavItem view={View.RESONANCE_CHECK} label="Check" icon="⌂" />
+            <NavItem view={View.ABOUT_CONTACT} label="Over" icon="ℹ" />
           </nav>
         </div>
 
@@ -100,15 +102,17 @@ const App: React.FC = () => {
           {currentView === View.CHAT && <ChatInterface />}
           {currentView === View.LIBRARY && <AxiomLibrary />}
           {currentView === View.RESONANCE_CHECK && <ResonanceCheck />}
+          {currentView === View.ABOUT_CONTACT && <AboutContact />}
         </div>
       </main>
 
       {/* Mobile Nav */}
       <footer className="md:hidden h-20 border-t border-purple-900/30 bg-gradient-to-r from-purple-950/30 via-indigo-950/30 to-blue-950/30 backdrop-blur-2xl shrink-0 z-30 relative">
-        <nav className="grid grid-cols-3 h-full">
+        <nav className="grid grid-cols-4 h-full">
           <NavItem view={View.CHAT} label="Gids" icon="◈" />
           <NavItem view={View.LIBRARY} label="Code" icon="◚" />
           <NavItem view={View.RESONANCE_CHECK} label="Check" icon="⌂" />
+          <NavItem view={View.ABOUT_CONTACT} label="Over" icon="ℹ" />
         </nav>
       </footer>
     </div>

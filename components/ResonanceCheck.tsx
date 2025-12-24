@@ -17,7 +17,7 @@ const ResonanceCheck: React.FC = () => {
   const avg = Object.values(answers).reduce((a: number, b: number) => a + b, 0) / questions.length;
 
   return (
-    <div className="max-w-4xl mx-auto p-6 md:p-8 space-y-10">
+    <div className="max-w-7xl mx-auto px-4 md:px-8 py-8 space-y-10">
       {/* Header */}
       <div className="text-center space-y-3 relative">
         <div className="absolute inset-0 flex items-center justify-center opacity-5">

@@ -9,7 +9,7 @@ const AxiomLibrary: React.FC = () => {
   const filteredAxioms = filter === 'All' ? AXIOMS : AXIOMS.filter(a => a.category === filter);
 
   return (
-    <div className="p-6 md:p-8 max-w-7xl mx-auto space-y-16">
+    <div className="max-w-7xl mx-auto px-4 md:px-8 py-8 space-y-16">
       {/* Header Section */}
       <section className="text-center mb-12 relative">
         <div className="absolute inset-0 flex items-center justify-center opacity-5">

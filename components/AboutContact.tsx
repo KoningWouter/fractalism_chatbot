@@ -3,7 +3,7 @@ import React from 'react';
 
 const AboutContact: React.FC = () => {
   return (
-    <div className="max-w-5xl mx-auto p-6 md:p-8 space-y-12">
+    <div className="max-w-7xl mx-auto px-4 md:px-8 py-8 space-y-12">
       {/* Header Section */}
       <section className="text-center mb-12 relative">
         <div className="absolute inset-0 flex items-center justify-center opacity-5">

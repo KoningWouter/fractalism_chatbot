@@ -38,7 +38,7 @@ const ChatInterface: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col h-full max-w-5xl mx-auto px-4 md:px-8 py-8">
+    <div className="flex flex-col h-full max-w-7xl mx-auto px-4 md:px-8 py-8">
       {/* Fractal Header Decoration */}
       <div className="text-center mb-8 relative">
         <div className="absolute inset-0 flex items-center justify-center opacity-10">

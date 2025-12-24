@@ -5,6 +5,7 @@ import ChatInterface from './components/ChatInterface';
 import AxiomLibrary from './components/AxiomLibrary';
 import ResonanceCheck from './components/ResonanceCheck';
 import AboutContact from './components/AboutContact';
+import Manifest from './components/Manifest';
 
 const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<View>(View.CHAT);
@@ -67,31 +68,34 @@ const App: React.FC = () => {
       </div>
 
       {/* Header */}
-      <header className="h-20 border-b border-purple-900/30 bg-gradient-to-r from-purple-950/20 via-indigo-950/20 to-blue-950/20 backdrop-blur-2xl flex items-center px-6 justify-between shrink-0 z-30 relative">
-        <div className="flex items-center space-x-4">
-          <div className="relative">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500 via-purple-600 to-blue-600 flex items-center justify-center luxury-glow-sm fractal-particle">
-              <span className="text-white font-bold text-xl font-display">∞</span>
+      <header className="h-20 border-b border-purple-900/30 bg-gradient-to-r from-purple-950/20 via-indigo-950/20 to-blue-950/20 backdrop-blur-2xl flex items-center shrink-0 z-30 relative">
+        <div className="w-full max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between">
+          <div className="flex items-center space-x-4">
+            <div className="relative">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500 via-purple-600 to-blue-600 flex items-center justify-center luxury-glow-sm fractal-particle">
+                <span className="text-white font-bold text-xl font-display">∞</span>
+              </div>
+              <div className="absolute -inset-1 bg-gradient-to-br from-amber-500 via-purple-600 to-blue-600 rounded-xl blur opacity-30 -z-10"></div>
             </div>
-            <div className="absolute -inset-1 bg-gradient-to-br from-amber-500 via-purple-600 to-blue-600 rounded-xl blur opacity-30 -z-10"></div>
+            <div>
+              <h1 className="text-2xl font-display font-bold gradient-text tracking-tight">De Fractale Gids</h1>
+              <p className="text-[11px] text-purple-400/70 font-mono -mt-1 uppercase tracking-wider">Resolutie & Resonantie</p>
+            </div>
           </div>
-          <div>
-            <h1 className="text-2xl font-display font-bold gradient-text tracking-tight">De Fractale Gids</h1>
-            <p className="text-[11px] text-purple-400/70 font-mono -mt-1 uppercase tracking-wider">Resolutie & Resonantie</p>
+          
+          <div className="hidden md:flex items-center space-x-8">
+             <nav className="flex space-x-2 h-20">
+              <NavItem view={View.CHAT} label="Dialoog" icon="◈" />
+              <NavItem view={View.LIBRARY} label="Bibliotheek" icon="◚" />
+              <NavItem view={View.RESONANCE_CHECK} label="Check" icon="⌂" />
+              <NavItem view={View.MANIFEST} label="Manifest" icon="📜" />
+              <NavItem view={View.ABOUT_CONTACT} label="Over" icon="ℹ" />
+            </nav>
           </div>
-        </div>
-        
-        <div className="hidden md:flex items-center space-x-8">
-           <nav className="flex space-x-2 h-20">
-            <NavItem view={View.CHAT} label="Dialoog" icon="◈" />
-            <NavItem view={View.LIBRARY} label="Bibliotheek" icon="◚" />
-            <NavItem view={View.RESONANCE_CHECK} label="Check" icon="⌂" />
-            <NavItem view={View.ABOUT_CONTACT} label="Over" icon="ℹ" />
-          </nav>
-        </div>
 
-        <div className="text-[10px] font-mono text-purple-500/50 hidden lg:block uppercase tracking-widest">
-          v3.0 Rosetta Stone
+          <div className="text-[10px] font-mono text-purple-500/50 hidden lg:block uppercase tracking-widest">
+            v3.0 Rosetta Stone
+          </div>
         </div>
       </header>
 
@@ -102,16 +106,18 @@ const App: React.FC = () => {
           {currentView === View.CHAT && <ChatInterface />}
           {currentView === View.LIBRARY && <AxiomLibrary />}
           {currentView === View.RESONANCE_CHECK && <ResonanceCheck />}
+          {currentView === View.MANIFEST && <Manifest />}
           {currentView === View.ABOUT_CONTACT && <AboutContact />}
         </div>
       </main>
 
       {/* Mobile Nav */}
       <footer className="md:hidden h-20 border-t border-purple-900/30 bg-gradient-to-r from-purple-950/30 via-indigo-950/30 to-blue-950/30 backdrop-blur-2xl shrink-0 z-30 relative">
-        <nav className="grid grid-cols-4 h-full">
+        <nav className="grid grid-cols-5 h-full">
           <NavItem view={View.CHAT} label="Gids" icon="◈" />
           <NavItem view={View.LIBRARY} label="Code" icon="◚" />
           <NavItem view={View.RESONANCE_CHECK} label="Check" icon="⌂" />
+          <NavItem view={View.MANIFEST} label="Manifest" icon="📜" />
           <NavItem view={View.ABOUT_CONTACT} label="Over" icon="ℹ" />
         </nav>
       </footer>

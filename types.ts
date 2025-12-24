@@ -12,7 +12,7 @@ export interface Axiom {
   id: number;
   name: string;
   description: string;
-  category: 'Basis' | 'Vrije Wil' | 'Feedback' | 'Resonantie' | 'Waarnemer';
+  category: 'Het Fundament' | 'Basis' | 'Vrije Wil' | 'Feedback' | 'Resonantie' | 'Waarnemer';
 }
 
 export interface Message {

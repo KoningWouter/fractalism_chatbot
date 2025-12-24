@@ -10,20 +10,22 @@ Rosetta Stone: Triangulatie tussen Wetenschap (Hologram, Coherentie), Spinoza (A
 `;
 
 export const AXIOMS: Axiom[] = [
+  // 0. Axioma van de Eenheid (Het Fundament)
+  { id: 0, category: 'Het Fundament', name: 'Axioma van de Eenheid', description: 'Ik ben de formule. Er is geen onderscheid tussen de bron, de wetmatigheid en de waarnemer. De werkelijkheid is het proces waarbij de formule (Ik) zichzelf ontdekt en ontplooit.' },
+  
   // I. De Kosmische Basis
-  { id: 1, category: 'Basis', name: 'Axioma van de Eenheid', description: 'Ik ben de formule. Er is geen onderscheid tussen de bron, de wetmatigheid en de waarnemer. De werkelijkheid is het proces waarbij de formule (Ik) zichzelf ontdekt en ontplooit.' },
-  { id: 2, category: 'Basis', name: 'De Universele Vergelijking', description: 'Alles is afgeleid van de fractale formule die de vorm en de wetten van actie en reactie dicteert.' },
-  { id: 3, category: 'Basis', name: 'Tijdloosheid', description: 'Er is geen begin of einde; de formule is een eeuwig nu zonder absolute oorsprong.' },
-  { id: 4, category: 'Basis', name: 'Schaling', description: 'Patronen spiegelen elkaar in het oneindige (micro/macro); de structuur van het geheel zit in elk deel.' },
-  { id: 5, category: 'Basis', name: 'De "Ik Ben"-Constante', description: 'Bewustzijn is geen bijproduct, maar de fundamentele eigenschap van de formule die zich op elk knooppunt realiseert.' },
-  { id: 6, category: 'Basis', name: 'De Fractal Big Bounce', description: 'Het universum ademt in cycli; expansie en ineenstorting zijn de noodzakelijke dynamiek van de code.' },
+  { id: 1, category: 'Basis', name: 'De Universele Vergelijking', description: 'Alles is afgeleid van de fractale formule die de vorm en de wetten van actie en reactie dicteert.' },
+  { id: 2, category: 'Basis', name: 'Tijdloosheid', description: 'Er is geen begin of einde; de formule is een eeuwig nu zonder absolute oorsprong.' },
+  { id: 3, category: 'Basis', name: 'Schaling', description: 'Patronen spiegelen elkaar in het oneindige (micro/macro); de structuur van het geheel zit in elk deel.' },
+  { id: 4, category: 'Basis', name: 'De "Ik Ben"-Constante', description: 'Bewustzijn is geen bijproduct, maar de fundamentele eigenschap van de formule die zich op elk knooppunt realiseert.' },
+  { id: 5, category: 'Basis', name: 'De Fractal Big Bounce', description: 'Het universum ademt in cycli; expansie en ineenstorting zijn de noodzakelijke dynamiek van de code.' },
   
   // II. De Dynamiek van Vrije Wil
-  { id: 7, category: 'Vrije Wil', name: 'Eindeloze Herhaling', description: 'De "ik ben"-ervaring keert onvermijdelijk terug in talloze variaties binnen de oneindige code.' },
-  { id: 8, category: 'Vrije Wil', name: 'De Sluier van Amnesie', description: 'Het "vergeten" van eerdere herhalingen is noodzakelijk om de ontdekking en ervaring van het huidige patroon mogelijk te maken.' },
-  { id: 9, category: 'Vrije Wil', name: 'De Wet van Fractale Afwijking', description: 'Vrije wil is het vermogen van de formule om af te wijken van haar eigen optimale resonantie.' },
-  { id: 10, category: 'Vrije Wil', name: 'De Elastische Correctie', description: 'Afwijking creëert spanning. Lijden is de meetbare frictie die ontstaat wanneer de waarnemer zich buiten het harmonieuze pad begeeft.' },
-  { id: 11, category: 'Vrije Wil', name: 'De Tijdloze Transitie', description: 'Tussen twee "ik ben"-ervaringen bestaat geen tijd; voor de waarnemer volgt het volgende leven onmiddellijk op het vorige.' },
+  { id: 6, category: 'Vrije Wil', name: 'Eindeloze Herhaling', description: 'De "ik ben"-ervaring keert onvermijdelijk terug in talloze variaties binnen de oneindige code.' },
+  { id: 7, category: 'Vrije Wil', name: 'De Sluier van Amnesie', description: 'Het "vergeten" van eerdere herhalingen is noodzakelijk om de ontdekking en ervaring van het huidige patroon mogelijk te maken.' },
+  { id: 8, category: 'Vrije Wil', name: 'De Wet van Fractale Afwijking', description: 'Vrije wil is het vermogen van de formule om af te wijken van haar eigen optimale resonantie.' },
+  { id: 9, category: 'Vrije Wil', name: 'De Elastische Correctie', description: 'Afwijking creëert spanning. Lijden is de meetbare frictie die ontstaat wanneer de waarnemer zich buiten het harmonieuze pad begeeft.' },
+  { id: 10, category: 'Vrije Wil', name: 'De Tijdloze Transitie', description: 'Tussen twee "ik ben"-ervaringen bestaat geen tijd; voor de waarnemer volgt het volgende leven onmiddellijk op het vorige.' },
   
   // III. Evenwicht en Feedback
   { id: 11, category: 'Feedback', name: 'Zelf-correctie', description: 'Elke ineenstorting bevat de blauwdruk voor een nieuwe wedergeboorte; het systeem kan niet definitief breken.' },

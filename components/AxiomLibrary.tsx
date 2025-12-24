@@ -4,7 +4,7 @@ import { AXIOMS, CORRELATIONS } from '../constants';
 
 const AxiomLibrary: React.FC = () => {
   const [filter, setFilter] = useState<string>('All');
-  const categories = ['All', 'Basis', 'Vrije Wil', 'Feedback', 'Resonantie', 'Waarnemer'];
+  const categories = ['All', 'Het Fundament', 'Basis', 'Vrije Wil', 'Feedback', 'Resonantie', 'Waarnemer'];
 
   const filteredAxioms = filter === 'All' ? AXIOMS : AXIOMS.filter(a => a.category === filter);
 
@@ -32,8 +32,8 @@ const AxiomLibrary: React.FC = () => {
             </defs>
           </svg>
         </div>
-        <h2 className="text-4xl md:text-5xl font-display font-bold gradient-text relative z-10 mb-3">De 25 Axioma's</h2>
-        <p className="text-purple-400/60 font-mono text-sm uppercase tracking-wider relative z-10">De fundamenten van fractale wijsheid</p>
+        <h2 className="text-4xl md:text-5xl font-display font-bold gradient-text relative z-10 mb-3">De 26 Axioma's</h2>
+        <p className="text-purple-400/60 font-mono text-sm uppercase tracking-wider relative z-10">De fundamenten van fractale wijsheid (0-25)</p>
       </section>
 
       <section>

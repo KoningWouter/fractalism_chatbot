@@ -169,8 +169,29 @@ const AboutContact: React.FC = () => {
                   Deze website en servers worden zelf betaald uit vertrouwen dat het universum zorgt dat het betaald kan worden. Het Fractalisme leert ons dat wanneer we handelen in resonantie met het patroon, de middelen zich manifesteren.
                 </p>
                 <p className="text-slate-300/80 leading-relaxed mb-6">
-                  Als je waarde vindt in deze gids en wilt bijdragen aan het voortbestaan en de groei van dit project, kun je een donatie doen via Bitcoin.
+                  Als je waarde vindt in deze gids en wilt bijdragen aan het voortbestaan en de groei van dit project, kun je een donatie doen via Bitcoin of Buy Me a Coffee.
                 </p>
+              </div>
+
+              <div className="flex items-start space-x-4">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500/20 via-purple-500/20 to-blue-500/20 border border-purple-500/30 flex items-center justify-center flex-shrink-0">
+                  <span className="text-2xl">☕</span>
+                </div>
+                <div className="flex-1">
+                  <h4 className="text-lg font-semibold text-purple-300 mb-2">Buy Me a Coffee</h4>
+                  <p className="text-slate-300/80 mb-3">Steun dit project met een eenmalige donatie of maandelijks abonnement via Buy Me a Coffee:</p>
+                  <a
+                    href="https://buymeacoffee.com/koningwouter"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center px-5 py-2.5 bg-gradient-to-r from-amber-600 via-purple-600 to-blue-600 hover:from-amber-500 hover:via-purple-500 hover:to-blue-500 text-white rounded-xl transition-all font-semibold luxury-glow-sm fractal-button relative overflow-hidden"
+                  >
+                    <span className="relative z-10 flex items-center">
+                      <span className="mr-2">☕</span>
+                      Support op Buy Me a Coffee
+                    </span>
+                  </a>
+                </div>
               </div>
 
               <div className="flex items-start space-x-4">

@@ -150,6 +150,65 @@ const AboutContact: React.FC = () => {
         </div>
       </section>
 
+      {/* Donation Section */}
+      <section className="space-y-8">
+        <div className="bg-gradient-to-br from-purple-950/40 via-indigo-950/40 to-slate-900/60 border border-purple-500/30 rounded-3xl p-8 md:p-10 luxury-glow-sm backdrop-blur-sm relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-64 h-64 opacity-5 pointer-events-none">
+            <svg viewBox="0 0 200 200" className="w-full h-full fractal-particle" style={{animationDelay: '3s'}}>
+              <path d="M 100 10 L 190 100 L 100 190 L 10 100 Z" fill="none" stroke="url(#aboutGold)" strokeWidth="1"/>
+              <path d="M 100 40 L 160 100 L 100 160 L 40 100 Z" fill="none" stroke="url(#aboutPurple)" strokeWidth="0.8"/>
+              <path d="M 100 70 L 130 100 L 100 130 L 70 100 Z" fill="none" stroke="url(#aboutBlue)" strokeWidth="0.6"/>
+            </svg>
+          </div>
+          
+          <div className="relative z-10">
+            <h3 className="text-2xl font-display font-bold text-amber-400 mb-6">Donatie</h3>
+            <div className="space-y-6">
+              <div>
+                <p className="text-slate-300/90 leading-relaxed text-lg mb-4">
+                  Deze website en servers worden zelf betaald uit vertrouwen dat het universum zorgt dat het betaald kan worden. Het Fractalisme leert ons dat wanneer we handelen in resonantie met het patroon, de middelen zich manifesteren.
+                </p>
+                <p className="text-slate-300/80 leading-relaxed mb-6">
+                  Als je waarde vindt in deze gids en wilt bijdragen aan het voortbestaan en de groei van dit project, kun je een donatie doen via Bitcoin.
+                </p>
+              </div>
+
+              <div className="flex items-start space-x-4">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500/20 via-purple-500/20 to-blue-500/20 border border-purple-500/30 flex items-center justify-center flex-shrink-0">
+                  <span className="text-2xl">₿</span>
+                </div>
+                <div className="flex-1">
+                  <h4 className="text-lg font-semibold text-purple-300 mb-2">Bitcoin Adres</h4>
+                  <p className="text-slate-300/80 mb-3">Donaties worden ontvangen op het volgende Bitcoin adres:</p>
+                  <div className="bg-slate-950/60 border border-purple-500/30 rounded-xl p-4 backdrop-blur-sm">
+                    <div className="flex items-center justify-between gap-4">
+                      <code className="text-amber-400 font-mono text-sm break-all select-all">
+                        bc1qy5vsfptssqjjgaumkchpj33422lx4jn8x4wtars8djvnasqvzz9qh7plg9
+                      </code>
+                      <button
+                        onClick={() => {
+                          navigator.clipboard.writeText('bc1qy5vsfptssqjjgaumkchpj33422lx4jn8x4wtars8djvnasqvzz9qh7plg9');
+                        }}
+                        className="px-4 py-2 bg-gradient-to-r from-amber-600/20 via-purple-600/20 to-blue-600/20 hover:from-amber-600/30 hover:via-purple-600/30 hover:to-blue-600/30 border border-purple-500/30 rounded-lg text-purple-300 text-sm font-mono transition-all flex-shrink-0"
+                        title="Kopieer adres"
+                      >
+                        Kopieer
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="pt-6 border-t border-purple-500/20">
+                <p className="text-slate-300/70 text-sm italic leading-relaxed">
+                  "In het vertrouwen op het fractale patroon vinden we dat wat nodig is, zich manifesteert wanneer we in resonantie handelen."
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Footer Note */}
       <section className="text-center pt-8">
         <div className="inline-block bg-gradient-to-r from-amber-500/10 via-purple-500/10 to-blue-500/10 border border-purple-500/20 rounded-2xl px-6 py-4">

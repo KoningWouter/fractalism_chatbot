@@ -25,7 +25,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -34,14 +34,15 @@
         }
         
         body {
-            font-family: 'Inter', sans-serif;
-            background: #0a0a0f;
+            font-family: 'Montserrat', 'Inter', sans-serif;
+            background: #050505;
             color: #f8fafc;
             overflow-x: hidden;
         }
         
         .font-display {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+            letter-spacing: 0.05em;
         }
         
         .font-mono {
@@ -52,25 +53,30 @@
             width: 10px;
         }
         ::-webkit-scrollbar-track {
-            background: #0a0a0f;
+            background: #050505;
         }
         ::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, #7c3aed 0%, #a855f7 50%, #3b82f6 100%);
+            background: linear-gradient(180deg, #D4AF37 0%, #708090 50%, #D4AF37 100%);
             border-radius: 5px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(180deg, #8b5cf6 0%, #c084fc 50%, #60a5fa 100%);
+            background: linear-gradient(180deg, #E5C158 0%, #8FA0B0 50%, #E5C158 100%);
         }
         
-        /* Luxurious fractal gradient backgrounds */
+        /* Deep Obsidian background with radial gradients */
         .fractal-gradient {
             background: 
-                radial-gradient(circle at 20% 30%, rgba(124, 58, 237, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(168, 85, 247, 0.12) 0%, transparent 50%),
-                radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.08) 0%, transparent 60%),
-                linear-gradient(135deg, #0a0a0f 0%, #1a0a2e 50%, #0a0a0f 100%);
+                radial-gradient(circle at 20% 30%, rgba(212, 175, 55, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(112, 128, 144, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.08) 0%, transparent 60%),
+                linear-gradient(135deg, #050505 0%, #0a0a0a 50%, #050505 100%);
             background-size: 200% 200%;
-            animation: fractalShift 20s ease infinite;
+            animation: fractalShift 25s ease infinite;
+        }
+        
+        @keyframes fractalParallax {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(-2%, -2%) scale(1.02); }
         }
         
         @keyframes fractalShift {
@@ -83,52 +89,122 @@
             position: absolute;
             width: 100%;
             height: 100%;
-            opacity: 0.03;
+            opacity: 0.05;
             background-image: 
-                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(168, 85, 247, 0.1) 2px, rgba(168, 85, 247, 0.1) 4px),
-                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(124, 58, 237, 0.1) 2px, rgba(124, 58, 237, 0.1) 4px);
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(212, 175, 55, 0.08) 2px, rgba(212, 175, 55, 0.08) 4px),
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(112, 128, 144, 0.06) 2px, rgba(112, 128, 144, 0.06) 4px);
             background-size: 40px 40px;
-            animation: fractalRotate 30s linear infinite;
+            animation: fractalRotate 35s linear infinite;
         }
         
         @keyframes fractalRotate {
             0% { transform: rotate(0deg) scale(1); }
-            50% { transform: rotate(180deg) scale(1.1); }
+            50% { transform: rotate(180deg) scale(1.05); }
             100% { transform: rotate(360deg) scale(1); }
         }
         
-        /* Golden fractal accent */
+        /* Champagne Gold accent */
         .fractal-gold {
-            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+            background: linear-gradient(135deg, #D4AF37 0%, #C9A227 50%, #B8941F 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
         
-        /* Luxurious glow effects */
+        /* Glassmorphism effect */
+        .glass {
+            background: rgba(5, 5, 5, 0.4);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+        }
+        
+        .glass-strong {
+            background: rgba(5, 5, 5, 0.6);
+            backdrop-filter: blur(30px) saturate(180%);
+            -webkit-backdrop-filter: blur(30px) saturate(180%);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        /* Luxurious glow effects with Champagne Gold */
         .luxury-glow {
             box-shadow: 
-                0 0 20px rgba(168, 85, 247, 0.3),
-                0 0 40px rgba(124, 58, 237, 0.2),
-                0 0 60px rgba(59, 130, 246, 0.1);
+                0 0 20px rgba(212, 175, 55, 0.25),
+                0 0 40px rgba(212, 175, 55, 0.15),
+                0 0 60px rgba(112, 128, 144, 0.1);
+            transition: box-shadow 0.4s ease;
         }
         
         .luxury-glow-sm {
             box-shadow: 
-                0 0 10px rgba(168, 85, 247, 0.2),
-                0 0 20px rgba(124, 58, 237, 0.15);
+                0 0 10px rgba(212, 175, 55, 0.2),
+                0 0 20px rgba(212, 175, 55, 0.12);
+            transition: box-shadow 0.4s ease;
         }
         
-        /* Fractal border animation */
+        .luxury-glow:hover {
+            box-shadow: 
+                0 0 30px rgba(212, 175, 55, 0.4),
+                0 0 50px rgba(212, 175, 55, 0.25),
+                0 0 80px rgba(112, 128, 144, 0.15);
+        }
+        
+        .luxury-glow-sm:hover {
+            box-shadow: 
+                0 0 15px rgba(212, 175, 55, 0.3),
+                0 0 30px rgba(212, 175, 55, 0.2);
+        }
+        
+        /* Fractal border animation with new colors */
         @keyframes fractalBorder {
-            0%, 100% { border-color: rgba(168, 85, 247, 0.3); }
-            25% { border-color: rgba(124, 58, 237, 0.5); }
-            50% { border-color: rgba(59, 130, 246, 0.4); }
-            75% { border-color: rgba(168, 85, 247, 0.5); }
+            0%, 100% { border-color: rgba(212, 175, 55, 0.3); }
+            25% { border-color: rgba(112, 128, 144, 0.4); }
+            50% { border-color: rgba(212, 175, 55, 0.5); }
+            75% { border-color: rgba(112, 128, 144, 0.35); }
         }
         
         .fractal-border {
-            animation: fractalBorder 4s ease infinite;
+            animation: fractalBorder 5s ease infinite;
+        }
+        
+        /* Fractal divider */
+        .fractal-divider {
+            position: relative;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(212, 175, 55, 0.2) 20%, 
+                rgba(212, 175, 55, 0.4) 50%, 
+                rgba(212, 175, 55, 0.2) 80%, 
+                transparent 100%);
+            margin: 2rem 0;
+        }
+        
+        .fractal-divider::before,
+        .fractal-divider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 8px;
+            height: 8px;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            border-radius: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .fractal-divider::before {
+            left: 20%;
+            animation: fractalPulse 3s ease infinite;
+        }
+        
+        .fractal-divider::after {
+            right: 20%;
+            animation: fractalPulse 3s ease infinite 1.5s;
+        }
+        
+        @keyframes fractalPulse {
+            0%, 100% { opacity: 0.4; transform: translateY(-50%) scale(1); }
+            50% { opacity: 0.8; transform: translateY(-50%) scale(1.2); }
         }
         
         /* Floating fractal particles */
@@ -141,14 +217,14 @@
             animation: float 6s ease-in-out infinite;
         }
         
-        /* Luxurious gradient text */
+        /* Luxurious gradient text with Champagne Gold */
         .gradient-text {
-            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 25%, #a855f7 50%, #3b82f6 75%, #fbbf24 100%);
+            background: linear-gradient(135deg, #D4AF37 0%, #C9A227 25%, #708090 50%, #D4AF37 75%, #E5C158 100%);
             background-size: 200% 200%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            animation: gradientShift 5s ease infinite;
+            animation: gradientShift 6s ease infinite;
         }
         
         @keyframes gradientShift {
@@ -156,10 +232,11 @@
             50% { background-position: 100% 50%; }
         }
         
-        /* Fractal-inspired button hover */
+        /* Fractal-inspired button with enhanced glow */
         .fractal-button {
             position: relative;
             overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         .fractal-button::before {
@@ -170,14 +247,41 @@
             width: 0;
             height: 0;
             border-radius: 50%;
-            background: rgba(168, 85, 247, 0.3);
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.4) 0%, transparent 70%);
             transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
+            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1), 
+                        height 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                        opacity 0.6s ease;
+            opacity: 0;
         }
         
         .fractal-button:hover::before {
-            width: 300px;
-            height: 300px;
+            width: 400px;
+            height: 400px;
+            opacity: 1;
+        }
+        
+        .fractal-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 
+                0 10px 30px rgba(212, 175, 55, 0.3),
+                0 0 40px rgba(212, 175, 55, 0.2);
+        }
+        
+        /* Smooth page transitions */
+        .page-transition {
+            animation: pageFadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        @keyframes pageFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         /* Fade in animation */
@@ -202,31 +306,31 @@
             width: 20px;
             height: 20px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #fbbf24 0%, #a855f7 50%, #3b82f6 100%);
+            background: linear-gradient(135deg, #D4AF37 0%, #708090 50%, #D4AF37 100%);
             cursor: pointer;
-            box-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
-            transition: all 0.3s;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         input[type="range"]::-webkit-slider-thumb:hover {
             transform: scale(1.2);
-            box-shadow: 0 0 15px rgba(168, 85, 247, 0.8);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.8);
         }
         
         input[type="range"]::-moz-range-thumb {
             width: 20px;
             height: 20px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #fbbf24 0%, #a855f7 50%, #3b82f6 100%);
+            background: linear-gradient(135deg, #D4AF37 0%, #708090 50%, #D4AF37 100%);
             cursor: pointer;
             border: none;
-            box-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
-            transition: all 0.3s;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         input[type="range"]::-moz-range-thumb:hover {
             transform: scale(1.2);
-            box-shadow: 0 0 15px rgba(168, 85, 247, 0.8);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.8);
         }
     </style>
 <script type="importmap">

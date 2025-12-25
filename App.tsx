@@ -58,7 +58,7 @@ const App: React.FC = () => {
               <NavItem view={View.CHAT} label="Dialoog" icon="◈" />
               <NavItem view={View.LIBRARY} label="Bibliotheek" icon="◚" />
               <NavItem view={View.RESONANCE_CHECK} label="Check" icon="⌂" />
-              <NavItem view={View.MANIFEST} label="Manifest" icon="📜" />
+              <NavItem view={View.MANIFEST} label="Manifest" icon="◷" />
               <NavItem view={View.ABOUT_CONTACT} label="Over" icon="ℹ" />
             </nav>
           </div>

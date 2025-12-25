@@ -21,6 +21,204 @@ const ChatInterface: React.FC = () => {
     }
   }, [messages]);
 
+  const formatText = (text: string): React.ReactNode => {
+    const lines = text.split('\n');
+    const elements: React.ReactNode[] = [];
+    let inList = false;
+    let listType: 'ordered' | 'unordered' | null = null;
+    let listItems: React.ReactNode[] = [];
+    let listCounter = 1;
+
+    const parseInline = (line: string): React.ReactNode => {
+      const parts: React.ReactNode[] = [];
+      let currentIndex = 0;
+      let keyCounter = 0;
+
+      // First handle code blocks (backticks)
+      const codeRegex = /`([^`]+)`/g;
+      let lastIndex = 0;
+      let match;
+
+      while ((match = codeRegex.exec(line)) !== null) {
+        // Add text before code
+        if (match.index > lastIndex) {
+          const beforeText = line.substring(lastIndex, match.index);
+          parts.push(...parseInlineText(beforeText, keyCounter));
+          keyCounter += 100;
+        }
+        // Add code
+        parts.push(
+          <code key={keyCounter++} className="bg-slate-800/60 px-1.5 py-0.5 rounded text-amber-400 font-mono text-sm">
+            {match[1]}
+          </code>
+        );
+        lastIndex = codeRegex.lastIndex;
+      }
+      // Add remaining text
+      if (lastIndex < line.length) {
+        parts.push(...parseInlineText(line.substring(lastIndex), keyCounter));
+      }
+
+      return <>{parts}</>;
+    };
+
+    const parseInlineText = (text: string, startKey: number): React.ReactNode[] => {
+      const parts: React.ReactNode[] = [];
+      let keyCounter = startKey;
+      
+      // Split on bold (**) first
+      const boldParts = text.split(/(\*\*[^*]+\*\*)/g);
+      
+      for (let i = 0; i < boldParts.length; i++) {
+        if (boldParts[i].startsWith('**') && boldParts[i].endsWith('**')) {
+          // Bold text - parse italic inside
+          const boldContent = boldParts[i].slice(2, -2);
+          const italicParts = boldContent.split(/(\*[^*]+\*)/g);
+          const boldElements: React.ReactNode[] = [];
+          
+          for (let j = 0; j < italicParts.length; j++) {
+            if (italicParts[j].startsWith('*') && italicParts[j].endsWith('*') && italicParts[j].length > 2) {
+              boldElements.push(
+                <em key={keyCounter++} className="italic">
+                  <strong className="font-semibold">{italicParts[j].slice(1, -1)}</strong>
+                </em>
+              );
+            } else if (italicParts[j]) {
+              boldElements.push(<strong key={keyCounter++} className="font-semibold">{italicParts[j]}</strong>);
+            }
+          }
+          parts.push(...boldElements);
+        } else if (boldParts[i]) {
+          // Regular text - parse italic
+          const italicParts = boldParts[i].split(/(\*[^*]+\*)/g);
+          for (let j = 0; j < italicParts.length; j++) {
+            if (italicParts[j].startsWith('*') && italicParts[j].endsWith('*') && italicParts[j].length > 2) {
+              parts.push(<em key={keyCounter++} className="italic text-purple-300">{italicParts[j].slice(1, -1)}</em>);
+            } else if (italicParts[j]) {
+              parts.push(<span key={keyCounter++}>{italicParts[j]}</span>);
+            }
+          }
+        }
+      }
+
+      return parts;
+    };
+
+    const flushList = () => {
+      if (listItems.length > 0) {
+        if (listType === 'ordered') {
+          elements.push(
+            <ol key={`list-${elements.length}`} className="list-decimal list-inside space-y-1 ml-4 my-2">
+              {listItems}
+            </ol>
+          );
+        } else {
+          elements.push(
+            <ul key={`list-${elements.length}`} className="list-disc list-inside space-y-1 ml-4 my-2">
+              {listItems}
+            </ul>
+          );
+        }
+        listItems = [];
+        listType = null;
+        listCounter = 1;
+        inList = false;
+      }
+    };
+
+    lines.forEach((line, lineIndex) => {
+      const trimmedLine = line.trim();
+
+      // Headers
+      if (trimmedLine.startsWith('### ')) {
+        flushList();
+        elements.push(
+          <h3 key={`h3-${lineIndex}`} className="text-lg font-display font-semibold text-blue-300 mt-4 mb-2">
+            {parseInline(trimmedLine.substring(4))}
+          </h3>
+        );
+        return;
+      }
+      if (trimmedLine.startsWith('## ')) {
+        flushList();
+        elements.push(
+          <h2 key={`h2-${lineIndex}`} className="text-xl font-display font-bold text-purple-300 mt-5 mb-3">
+            {parseInline(trimmedLine.substring(3))}
+          </h2>
+        );
+        return;
+      }
+      if (trimmedLine.startsWith('# ')) {
+        flushList();
+        elements.push(
+          <h1 key={`h1-${lineIndex}`} className="text-2xl font-display font-bold text-amber-400 mt-6 mb-4">
+            {parseInline(trimmedLine.substring(2))}
+          </h1>
+        );
+        return;
+      }
+
+      // Quotes
+      if (trimmedLine.startsWith('> ')) {
+        flushList();
+        elements.push(
+          <blockquote key={`quote-${lineIndex}`} className="border-l-4 border-amber-500/50 pl-4 py-2 my-3 italic text-slate-300/90 bg-slate-900/30 rounded-r-lg">
+            {parseInline(trimmedLine.substring(2))}
+          </blockquote>
+        );
+        return;
+      }
+
+      // Ordered list
+      const orderedMatch = trimmedLine.match(/^(\d+)\.\s+(.+)$/);
+      if (orderedMatch) {
+        if (!inList || listType !== 'ordered') {
+          flushList();
+          inList = true;
+          listType = 'ordered';
+        }
+        listItems.push(
+          <li key={`ol-${lineIndex}`} className="my-1">
+            {parseInline(orderedMatch[2])}
+          </li>
+        );
+        return;
+      }
+
+      // Unordered list
+      const unorderedMatch = trimmedLine.match(/^[-*]\s+(.+)$/);
+      if (unorderedMatch) {
+        if (!inList || listType !== 'unordered') {
+          flushList();
+          inList = true;
+          listType = 'unordered';
+        }
+        listItems.push(
+          <li key={`ul-${lineIndex}`} className="my-1">
+            {parseInline(unorderedMatch[1])}
+          </li>
+        );
+        return;
+      }
+
+      // Regular line
+      flushList();
+      if (trimmedLine) {
+        elements.push(
+          <p key={`p-${lineIndex}`} className="my-2">
+            {parseInline(trimmedLine)}
+          </p>
+        );
+      } else {
+        // Empty line
+        elements.push(<br key={`br-${lineIndex}`} />);
+      }
+    });
+
+    flushList();
+    return <>{elements}</>;
+  };
+
   const handleSend = async () => {
     if (!input.trim() || isLoading) return;
 
@@ -81,7 +279,7 @@ const ChatInterface: React.FC = () => {
                   <span className="text-white text-sm">∞</span>
                 </div>
               )}
-              <p className="whitespace-pre-wrap text-sm md:text-base leading-relaxed">{m.text}</p>
+              <div className="text-sm md:text-base leading-relaxed whitespace-pre-wrap">{formatText(m.text)}</div>
               <span className={`text-[10px] opacity-60 mt-3 block ${m.role === 'user' ? 'text-right' : 'text-left'} font-mono text-purple-400/70`}>
                 {m.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
               </span>

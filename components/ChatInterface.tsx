@@ -278,12 +278,12 @@ const ChatInterface: React.FC = () => {
 
       <div 
         ref={scrollRef}
-        className="flex-1 overflow-y-auto space-y-4 pb-4"
+        className="flex-1 overflow-y-auto overflow-x-visible space-y-4 pt-4 pb-4 px-2"
       >
         {messages.map((m, i) => (
           <div 
             key={i} 
-            className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'} animate-fadeIn`}
+            className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'} animate-fadeIn relative`}
           >
             <div className={`max-w-[85%] p-6 rounded-3xl relative glass luxury-glow-sm ${
               m.role === 'user' 
@@ -291,7 +291,7 @@ const ChatInterface: React.FC = () => {
                 : 'rounded-tl-sm border border-[#708090]/30'
             }`}>
               {m.role === 'model' && (
-                <div className="absolute -top-2 -left-2 w-8 h-8 rounded-full bg-gradient-to-br from-[#D4AF37] to-[#708090] flex items-center justify-center luxury-glow-sm">
+                <div className="absolute -top-2 -left-2 w-8 h-8 rounded-full bg-gradient-to-br from-[#D4AF37] to-[#708090] flex items-center justify-center luxury-glow-sm z-20">
                   <span className="text-[#050505] text-sm font-bold">∞</span>
                 </div>
               )}

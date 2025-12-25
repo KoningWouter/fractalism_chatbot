@@ -328,9 +328,10 @@ const ChatInterface: React.FC = () => {
           <button
             onClick={handleSend}
             disabled={isLoading}
-            className="bg-gradient-to-r from-[#D4AF37] via-[#708090] to-[#D4AF37] hover:from-[#E5C158] hover:via-[#8FA0B0] hover:to-[#E5C158] text-[#050505] px-8 py-4 rounded-2xl transition-all font-semibold disabled:opacity-50 luxury-glow-sm fractal-button relative overflow-hidden"
+            className="bg-gradient-to-r from-[#D4AF37] via-[#708090] to-[#D4AF37] hover:from-[#E5C158] hover:via-[#8FA0B0] hover:to-[#E5C158] text-[#050505] px-4 md:px-8 py-4 rounded-2xl transition-all font-semibold disabled:opacity-50 luxury-glow-sm fractal-button relative overflow-hidden flex items-center justify-center min-w-[56px]"
+            title="Verzenden"
           >
-            <span className="relative z-10">Verzend</span>
+            <span className="relative z-10 text-xl md:text-2xl">➤</span>
           </button>
         </div>
         <p className="text-[10px] text-center text-[#708090]/60 mt-4 font-mono uppercase tracking-widest">

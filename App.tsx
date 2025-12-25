@@ -69,6 +69,17 @@ const App: React.FC = () => {
         </div>
       </header>
 
+      {/* Mobile Nav with Glassmorphism - Moved to top */}
+      <div className="md:hidden h-20 border-b border-[#D4AF37]/20 glass-strong shrink-0 z-30 relative">
+        <nav className="grid grid-cols-5 h-full">
+          <NavItem view={View.CHAT} label="Gids" icon="◈" />
+          <NavItem view={View.LIBRARY} label="Code" icon="◚" />
+          <NavItem view={View.RESONANCE_CHECK} label="Check" icon="⌂" />
+          <NavItem view={View.MANIFEST} label="Manifest" icon="◷" />
+          <NavItem view={View.ABOUT_CONTACT} label="Over" icon="ℹ" />
+        </nav>
+      </div>
+
       {/* Main Content Area */}
       <main className="flex-1 relative overflow-hidden flex flex-col z-10">
         {/* Views with smooth transitions */}
@@ -83,16 +94,6 @@ const App: React.FC = () => {
         </div>
       </main>
 
-      {/* Mobile Nav with Glassmorphism */}
-      <footer className="md:hidden h-20 border-t border-[#D4AF37]/20 glass-strong shrink-0 z-30 relative">
-        <nav className="grid grid-cols-5 h-full">
-          <NavItem view={View.CHAT} label="Gids" icon="◈" />
-          <NavItem view={View.LIBRARY} label="Code" icon="◚" />
-          <NavItem view={View.RESONANCE_CHECK} label="Check" icon="⌂" />
-          <NavItem view={View.MANIFEST} label="Manifest" icon="📜" />
-          <NavItem view={View.ABOUT_CONTACT} label="Over" icon="ℹ" />
-        </nav>
-      </footer>
     </div>
   );
 };

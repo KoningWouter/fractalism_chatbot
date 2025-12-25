@@ -16,16 +16,20 @@ const defaultMessage: Message = {
   timestamp: new Date()
 };
 
+const MAX_MESSAGES = 10;
+
 const loadMessagesFromStorage = (): Message[] => {
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored) {
       const parsed = JSON.parse(stored);
       // Convert timestamp strings back to Date objects
-      return parsed.map((msg: any) => ({
+      const messages = parsed.map((msg: any) => ({
         ...msg,
         timestamp: new Date(msg.timestamp)
       }));
+      // Return only the last MAX_MESSAGES messages
+      return messages.slice(-MAX_MESSAGES);
     }
   } catch (error) {
     console.error('Error loading messages from storage:', error);
@@ -35,7 +39,9 @@ const loadMessagesFromStorage = (): Message[] => {
 
 const saveMessagesToStorage = (messages: Message[]) => {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
+    // Only save the last MAX_MESSAGES messages
+    const messagesToSave = messages.slice(-MAX_MESSAGES);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(messagesToSave));
   } catch (error) {
     console.error('Error saving messages to storage:', error);
   }
@@ -45,9 +51,15 @@ const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<View>(View.CHAT);
   const [chatMessages, setChatMessages] = useState<Message[]>(() => loadMessagesFromStorage());
 
-  // Save messages to localStorage whenever they change
+  // Limit messages to last MAX_MESSAGES and save to localStorage
   useEffect(() => {
-    saveMessagesToStorage(chatMessages);
+    if (chatMessages.length > MAX_MESSAGES) {
+      const limitedMessages = chatMessages.slice(-MAX_MESSAGES);
+      setChatMessages(limitedMessages);
+      saveMessagesToStorage(limitedMessages);
+    } else {
+      saveMessagesToStorage(chatMessages);
+    }
   }, [chatMessages]);
 
   const NavItem = ({ view, label, icon }: { view: View, label: string, icon: string }) => (

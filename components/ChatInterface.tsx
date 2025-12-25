@@ -13,24 +13,18 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ messages, setMessages }) 
   const [isLoading, setIsLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const lastModelMessageRef = useRef<HTMLDivElement>(null);
+  const lastUserMessageRef = useRef<HTMLDivElement>(null);
 
-  // Scroll to the last model message (answer) when it appears
+  // Scroll to the last user message (question) when it's sent
   useEffect(() => {
-    // Only scroll if the last message is from the model (i.e., an answer just arrived)
     const lastMessage = messages[messages.length - 1];
-    if (lastMessage && lastMessage.role === 'model' && lastModelMessageRef.current && scrollRef.current) {
-      const messageElement = lastModelMessageRef.current;
-      const scrollContainer = scrollRef.current;
-      
+    if (lastMessage && lastMessage.role === 'user' && lastUserMessageRef.current) {
       // Use setTimeout to ensure the DOM has updated
       setTimeout(() => {
-        // Calculate the position of the message relative to the scroll container
-        const messageTop = messageElement.offsetTop - scrollContainer.offsetTop;
-        
-        // Scroll to the beginning of the message with some offset for better visibility
-        scrollContainer.scrollTo({
-          top: messageTop - 20, // 20px offset from top
-          behavior: 'smooth'
+        lastUserMessageRef.current?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+          inline: 'nearest'
         });
       }, 100);
     }
@@ -300,10 +294,11 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ messages, setMessages }) 
       >
         {messages.map((m, i) => {
           const isLastModelMessage = m.role === 'model' && i === messages.length - 1;
+          const isLastUserMessage = m.role === 'user' && i === messages.length - 1;
           return (
             <div 
               key={i} 
-              ref={isLastModelMessage ? lastModelMessageRef : null}
+              ref={isLastModelMessage ? lastModelMessageRef : isLastUserMessage ? lastUserMessageRef : null}
               className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'} animate-fadeIn relative`}
             >
               <div className={`max-w-[85%] p-6 rounded-3xl relative glass luxury-glow-sm ${

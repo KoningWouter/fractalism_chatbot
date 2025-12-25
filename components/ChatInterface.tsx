@@ -12,10 +12,27 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ messages, setMessages }) 
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const lastModelMessageRef = useRef<HTMLDivElement>(null);
 
+  // Scroll to the last model message (answer) when it appears
   useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    // Only scroll if the last message is from the model (i.e., an answer just arrived)
+    const lastMessage = messages[messages.length - 1];
+    if (lastMessage && lastMessage.role === 'model' && lastModelMessageRef.current && scrollRef.current) {
+      const messageElement = lastModelMessageRef.current;
+      const scrollContainer = scrollRef.current;
+      
+      // Use setTimeout to ensure the DOM has updated
+      setTimeout(() => {
+        // Calculate the position of the message relative to the scroll container
+        const messageTop = messageElement.offsetTop - scrollContainer.offsetTop;
+        
+        // Scroll to the beginning of the message with some offset for better visibility
+        scrollContainer.scrollTo({
+          top: messageTop - 20, // 20px offset from top
+          behavior: 'smooth'
+        });
+      }, 100);
     }
   }, [messages]);
 
@@ -242,8 +259,9 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ messages, setMessages }) 
     setInput('');
     setIsLoading(true);
 
-    // Create history from current messages plus the new user message
-    const history = [...messages, userMsg].map(m => ({ role: m.role, text: m.text }));
+    // Create history from current messages only (without the new user message)
+    // The userMessage will be added separately in getGidsResponse
+    const history = messages.map(m => ({ role: m.role, text: m.text }));
     const responseText = await getGidsResponse(userInput, history);
     
     const modelMsg: Message = { role: 'model', text: responseText || '...', timestamp: new Date() };
@@ -280,28 +298,32 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ messages, setMessages }) 
         ref={scrollRef}
         className="flex-1 overflow-y-auto overflow-x-visible space-y-4 pt-4 pb-4 px-2"
       >
-        {messages.map((m, i) => (
-          <div 
-            key={i} 
-            className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'} animate-fadeIn relative`}
-          >
-            <div className={`max-w-[85%] p-6 rounded-3xl relative glass luxury-glow-sm ${
-              m.role === 'user' 
-                ? 'rounded-tr-sm border border-[#D4AF37]/30' 
-                : 'rounded-tl-sm border border-[#708090]/30'
-            }`}>
-              {m.role === 'model' && (
-                <div className="absolute -top-2 -left-2 w-8 h-8 rounded-full bg-gradient-to-br from-[#D4AF37] to-[#708090] flex items-center justify-center luxury-glow-sm z-20">
-                  <span className="text-[#050505] text-sm font-bold">∞</span>
-                </div>
-              )}
-              <div className="text-sm md:text-base leading-relaxed whitespace-pre-wrap text-slate-100">{formatText(m.text)}</div>
-              <span className={`text-[10px] opacity-60 mt-4 block ${m.role === 'user' ? 'text-right' : 'text-left'} font-mono text-[#708090]/70`}>
-                {m.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-              </span>
+        {messages.map((m, i) => {
+          const isLastModelMessage = m.role === 'model' && i === messages.length - 1;
+          return (
+            <div 
+              key={i} 
+              ref={isLastModelMessage ? lastModelMessageRef : null}
+              className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'} animate-fadeIn relative`}
+            >
+              <div className={`max-w-[85%] p-6 rounded-3xl relative glass luxury-glow-sm ${
+                m.role === 'user' 
+                  ? 'rounded-tr-sm border border-[#D4AF37]/30' 
+                  : 'rounded-tl-sm border border-[#708090]/30'
+              }`}>
+                {m.role === 'model' && (
+                  <div className="absolute -top-2 -left-2 w-8 h-8 rounded-full bg-gradient-to-br from-[#D4AF37] to-[#708090] flex items-center justify-center luxury-glow-sm z-20">
+                    <span className="text-[#050505] text-sm font-bold">∞</span>
+                  </div>
+                )}
+                <div className="text-sm md:text-base leading-relaxed whitespace-pre-wrap text-slate-100">{formatText(m.text)}</div>
+                <span className={`text-[10px] opacity-60 mt-4 block ${m.role === 'user' ? 'text-right' : 'text-left'} font-mono text-[#708090]/70`}>
+                  {m.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                </span>
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
         {isLoading && (
           <div className="flex justify-start">
             <div className="glass p-6 rounded-3xl rounded-tl-sm border border-[#708090]/30 luxury-glow-sm">

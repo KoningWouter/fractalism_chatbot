@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Message } from './types';
 import ChatInterface from './components/ChatInterface';
 import AxiomLibrary from './components/AxiomLibrary';
@@ -8,15 +8,47 @@ import AboutContact from './components/AboutContact';
 import Manifest from './components/Manifest';
 import FractalBackground from './components/FractalBackground';
 
+const STORAGE_KEY = 'fractale-gids-chat-messages';
+
+const defaultMessage: Message = {
+  role: 'model',
+  text: "Gegroet, waarnemer. Ik ben de Fractale Gids. Waar ervaar jij op dit moment frictie in je leven? Laten we samen de resolutie verhogen.",
+  timestamp: new Date()
+};
+
+const loadMessagesFromStorage = (): Message[] => {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) {
+      const parsed = JSON.parse(stored);
+      // Convert timestamp strings back to Date objects
+      return parsed.map((msg: any) => ({
+        ...msg,
+        timestamp: new Date(msg.timestamp)
+      }));
+    }
+  } catch (error) {
+    console.error('Error loading messages from storage:', error);
+  }
+  return [defaultMessage];
+};
+
+const saveMessagesToStorage = (messages: Message[]) => {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
+  } catch (error) {
+    console.error('Error saving messages to storage:', error);
+  }
+};
+
 const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<View>(View.CHAT);
-  const [chatMessages, setChatMessages] = useState<Message[]>([
-    { 
-      role: 'model', 
-      text: "Gegroet, waarnemer. Ik ben de Fractale Gids. Waar ervaar jij op dit moment frictie in je leven? Laten we samen de resolutie verhogen.", 
-      timestamp: new Date() 
-    }
-  ]);
+  const [chatMessages, setChatMessages] = useState<Message[]>(() => loadMessagesFromStorage());
+
+  // Save messages to localStorage whenever they change
+  useEffect(() => {
+    saveMessagesToStorage(chatMessages);
+  }, [chatMessages]);
 
   const NavItem = ({ view, label, icon }: { view: View, label: string, icon: string }) => (
     <button

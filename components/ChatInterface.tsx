@@ -315,20 +315,20 @@ const ChatInterface: React.FC = () => {
         )}
       </div>
 
-      <div className="p-6 border-t border-[#D4AF37]/20 glass-strong sticky bottom-0 rounded-t-3xl mt-6">
-        <div className="flex space-x-3">
+      <div className="p-4 md:p-6 border-t border-[#D4AF37]/20 glass-strong sticky bottom-0 rounded-t-3xl mt-6">
+        <div className="flex gap-2 md:gap-3 items-stretch">
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyPress={(e) => e.key === 'Enter' && handleSend()}
             placeholder="Beschrijf je frictie of stel een vraag..."
-            className="flex-1 glass border border-[#708090]/30 rounded-2xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/50 focus:border-[#D4AF37]/50 text-white placeholder-[#708090]/50 backdrop-blur-sm transition-all"
+            className="flex-1 min-w-0 glass border border-[#708090]/30 rounded-2xl px-4 md:px-5 py-3 md:py-4 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/50 focus:border-[#D4AF37]/50 text-white placeholder-[#708090]/50 backdrop-blur-sm transition-all text-sm md:text-base"
           />
           <button
             onClick={handleSend}
             disabled={isLoading}
-            className="bg-gradient-to-r from-[#D4AF37] via-[#708090] to-[#D4AF37] hover:from-[#E5C158] hover:via-[#8FA0B0] hover:to-[#E5C158] text-[#050505] px-4 md:px-8 py-4 rounded-2xl transition-all font-semibold disabled:opacity-50 luxury-glow-sm fractal-button relative overflow-hidden flex items-center justify-center min-w-[56px]"
+            className="bg-gradient-to-r from-[#D4AF37] via-[#708090] to-[#D4AF37] hover:from-[#E5C158] hover:via-[#8FA0B0] hover:to-[#E5C158] text-[#050505] w-12 h-12 md:w-auto md:px-8 md:py-4 rounded-2xl transition-all font-semibold disabled:opacity-50 luxury-glow-sm fractal-button relative overflow-hidden flex items-center justify-center flex-shrink-0"
             title="Verzenden"
           >
             <span className="relative z-10 text-xl md:text-2xl">➤</span>

@@ -3,14 +3,12 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Message } from '../types';
 import { getGidsResponse } from '../services/geminiService';
 
-const ChatInterface: React.FC = () => {
-  const [messages, setMessages] = useState<Message[]>([
-    { 
-      role: 'model', 
-      text: "Gegroet, waarnemer. Ik ben de Fractale Gids. Waar ervaar jij op dit moment frictie in je leven? Laten we samen de resolutie verhogen.", 
-      timestamp: new Date() 
-    }
-  ]);
+interface ChatInterfaceProps {
+  messages: Message[];
+  setMessages: React.Dispatch<React.SetStateAction<Message[]>>;
+}
+
+const ChatInterface: React.FC<ChatInterfaceProps> = ({ messages, setMessages }) => {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -239,12 +237,14 @@ const ChatInterface: React.FC = () => {
     if (!input.trim() || isLoading) return;
 
     const userMsg: Message = { role: 'user', text: input, timestamp: new Date() };
+    const userInput = input;
     setMessages(prev => [...prev, userMsg]);
     setInput('');
     setIsLoading(true);
 
-    const history = messages.map(m => ({ role: m.role, text: m.text }));
-    const responseText = await getGidsResponse(input, history);
+    // Create history from current messages plus the new user message
+    const history = [...messages, userMsg].map(m => ({ role: m.role, text: m.text }));
+    const responseText = await getGidsResponse(userInput, history);
     
     const modelMsg: Message = { role: 'model', text: responseText || '...', timestamp: new Date() };
     setMessages(prev => [...prev, modelMsg]);

@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { View } from './types';
+import { View, Message } from './types';
 import ChatInterface from './components/ChatInterface';
 import AxiomLibrary from './components/AxiomLibrary';
 import ResonanceCheck from './components/ResonanceCheck';
@@ -10,6 +10,13 @@ import FractalBackground from './components/FractalBackground';
 
 const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<View>(View.CHAT);
+  const [chatMessages, setChatMessages] = useState<Message[]>([
+    { 
+      role: 'model', 
+      text: "Gegroet, waarnemer. Ik ben de Fractale Gids. Waar ervaar jij op dit moment frictie in je leven? Laten we samen de resolutie verhogen.", 
+      timestamp: new Date() 
+    }
+  ]);
 
   const NavItem = ({ view, label, icon }: { view: View, label: string, icon: string }) => (
     <button
@@ -85,7 +92,7 @@ const App: React.FC = () => {
         {/* Views with smooth transitions */}
         <div className="relative z-10 h-full overflow-y-auto">
           <div className="page-transition">
-            {currentView === View.CHAT && <ChatInterface />}
+            {currentView === View.CHAT && <ChatInterface messages={chatMessages} setMessages={setChatMessages} />}
             {currentView === View.LIBRARY && <AxiomLibrary />}
             {currentView === View.RESONANCE_CHECK && <ResonanceCheck />}
             {currentView === View.MANIFEST && <Manifest />}

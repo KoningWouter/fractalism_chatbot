@@ -108,13 +108,13 @@ const ChatInterface: React.FC = () => {
       if (listItems.length > 0) {
         if (listType === 'ordered') {
           elements.push(
-            <ol key={`list-${elements.length}`} className="list-decimal list-inside space-y-1 ml-4 my-2">
+            <ol key={`list-${elements.length}`} className="list-decimal list-inside space-y-0.5 ml-4 my-1">
               {listItems}
             </ol>
           );
         } else {
           elements.push(
-            <ul key={`list-${elements.length}`} className="list-disc list-inside space-y-1 ml-4 my-2">
+            <ul key={`list-${elements.length}`} className="list-disc list-inside space-y-0.5 ml-4 my-1">
               {listItems}
             </ul>
           );
@@ -126,14 +126,30 @@ const ChatInterface: React.FC = () => {
       }
     };
 
-    lines.forEach((line, lineIndex) => {
+    // Collapse multiple consecutive empty lines into single empty lines
+    const processedLines: string[] = [];
+    let lastWasEmpty = false;
+    for (const line of lines) {
+      const trimmedLine = line.trim();
+      if (trimmedLine === '') {
+        if (!lastWasEmpty) {
+          processedLines.push('');
+          lastWasEmpty = true;
+        }
+      } else {
+        processedLines.push(line);
+        lastWasEmpty = false;
+      }
+    }
+
+    processedLines.forEach((line, lineIndex) => {
       const trimmedLine = line.trim();
 
       // Headers
       if (trimmedLine.startsWith('### ')) {
         flushList();
         elements.push(
-          <h3 key={`h3-${lineIndex}`} className="text-lg font-display font-semibold text-blue-300 mt-4 mb-2">
+          <h3 key={`h3-${lineIndex}`} className="text-lg font-display font-semibold text-blue-300 mt-2 mb-1">
             {parseInline(trimmedLine.substring(4))}
           </h3>
         );
@@ -142,7 +158,7 @@ const ChatInterface: React.FC = () => {
       if (trimmedLine.startsWith('## ')) {
         flushList();
         elements.push(
-          <h2 key={`h2-${lineIndex}`} className="text-xl font-display font-bold text-purple-300 mt-5 mb-3">
+          <h2 key={`h2-${lineIndex}`} className="text-xl font-display font-bold text-purple-300 mt-2 mb-1">
             {parseInline(trimmedLine.substring(3))}
           </h2>
         );
@@ -151,7 +167,7 @@ const ChatInterface: React.FC = () => {
       if (trimmedLine.startsWith('# ')) {
         flushList();
         elements.push(
-          <h1 key={`h1-${lineIndex}`} className="text-2xl font-display font-bold text-amber-400 mt-6 mb-4">
+          <h1 key={`h1-${lineIndex}`} className="text-2xl font-display font-bold text-amber-400 mt-2 mb-1">
             {parseInline(trimmedLine.substring(2))}
           </h1>
         );
@@ -162,7 +178,7 @@ const ChatInterface: React.FC = () => {
       if (trimmedLine.startsWith('> ')) {
         flushList();
         elements.push(
-          <blockquote key={`quote-${lineIndex}`} className="border-l-4 border-amber-500/50 pl-4 py-2 my-3 italic text-slate-300/90 bg-slate-900/30 rounded-r-lg">
+          <blockquote key={`quote-${lineIndex}`} className="border-l-4 border-amber-500/50 pl-4 py-1 my-1 italic text-slate-300/90 bg-slate-900/30 rounded-r-lg">
             {parseInline(trimmedLine.substring(2))}
           </blockquote>
         );
@@ -178,7 +194,7 @@ const ChatInterface: React.FC = () => {
           listType = 'ordered';
         }
         listItems.push(
-          <li key={`ol-${lineIndex}`} className="my-1">
+          <li key={`ol-${lineIndex}`} className="my-0.5">
             {parseInline(orderedMatch[2])}
           </li>
         );
@@ -194,7 +210,7 @@ const ChatInterface: React.FC = () => {
           listType = 'unordered';
         }
         listItems.push(
-          <li key={`ul-${lineIndex}`} className="my-1">
+          <li key={`ul-${lineIndex}`} className="my-0.5">
             {parseInline(unorderedMatch[1])}
           </li>
         );
@@ -205,12 +221,12 @@ const ChatInterface: React.FC = () => {
       flushList();
       if (trimmedLine) {
         elements.push(
-          <p key={`p-${lineIndex}`} className="my-2">
+          <p key={`p-${lineIndex}`} className="my-1">
             {parseInline(trimmedLine)}
           </p>
         );
       } else {
-        // Empty line
+        // Empty line - only add one br for spacing
         elements.push(<br key={`br-${lineIndex}`} />);
       }
     });
@@ -262,7 +278,7 @@ const ChatInterface: React.FC = () => {
 
       <div 
         ref={scrollRef}
-        className="flex-1 overflow-y-auto space-y-6 pb-4"
+        className="flex-1 overflow-y-auto space-y-3 pb-4"
       >
         {messages.map((m, i) => (
           <div 

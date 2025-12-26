@@ -131,9 +131,9 @@ const AboutContact: React.FC = () => {
             </div>
 
             <div className="pt-6 border-t border-[#708090]/20">
-              <h4 className="text-xl font-display font-semibold text-[#708090] mb-3">De 25 Axioma's</h4>
+              <h4 className="text-xl font-display font-semibold text-[#708090] mb-3">De 26 Axioma's</h4>
               <p className="text-slate-300/80 leading-relaxed">
-                Het systeem is gebouwd op 25 fundamentele axioma's die de kernprincipes van het Fractalisme beschrijven. Deze axioma's helpen bij het verlagen van frictie en het verhogen van resolutie in je dagelijks leven.
+                Het systeem is gebouwd op 26 fundamentele axioma's die de kernprincipes van het Fractalisme beschrijven. Deze axioma's helpen bij het verlagen van frictie en het verhogen van resolutie in je dagelijks leven.
               </p>
             </div>
 

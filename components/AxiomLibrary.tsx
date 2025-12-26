@@ -33,7 +33,7 @@ const AxiomLibrary: React.FC = () => {
           </svg>
         </div>
         <h2 className="text-4xl md:text-5xl font-display font-bold gradient-text relative z-10 mb-4">De 26 Axioma's</h2>
-        <p className="text-[#708090]/70 font-mono text-sm uppercase tracking-wider relative z-10">De fundamenten van fractale wijsheid (0-25)</p>
+        <p className="text-[#708090]/70 font-mono text-sm uppercase tracking-wider relative z-10">De fundamenten van fractale wijsheid (0-26)</p>
       </section>
 
       <section>

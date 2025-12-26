@@ -15,30 +15,45 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ messages, setMessages }) 
   const lastModelMessageRef = useRef<HTMLDivElement>(null);
   const lastUserMessageRef = useRef<HTMLDivElement>(null);
 
-  // Scroll to show the last user message (question) at the top when it's sent
+  // Scroll to the anchor of the last user message (question) when it's sent
   useEffect(() => {
     const lastMessage = messages[messages.length - 1];
-    if (lastMessage && lastMessage.role === 'user' && lastUserMessageRef.current && scrollRef.current) {
+    if (lastMessage && lastMessage.role === 'user' && lastUserMessageRef.current) {
       // Use setTimeout to ensure the DOM has updated
       setTimeout(() => {
-        if (lastUserMessageRef.current && scrollRef.current) {
-          const scrollContainer = scrollRef.current;
+        if (lastUserMessageRef.current) {
           const messageElement = lastUserMessageRef.current;
+          const anchorId = messageElement.id;
           
-          // Calculate the scroll position to place the message at the top of the container
-          const containerRect = scrollContainer.getBoundingClientRect();
-          const messageRect = messageElement.getBoundingClientRect();
-          
-          // Calculate how much we need to scroll
-          // Current scroll position + difference between message and container top positions
-          const currentScrollTop = scrollContainer.scrollTop;
-          const messageTopRelativeToContainer = messageRect.top - containerRect.top + currentScrollTop;
-          const targetScrollTop = messageTopRelativeToContainer - 20; // 20px padding from top
-          
-          scrollContainer.scrollTo({
-            top: Math.max(0, targetScrollTop),
-            behavior: 'smooth'
-          });
+          if (anchorId) {
+            // Update the URL hash for browser navigation
+            window.location.hash = anchorId;
+            
+            // Scroll to the anchor - works for both desktop and mobile
+            // First scroll the container, then the page
+            if (scrollRef.current) {
+              const scrollContainer = scrollRef.current;
+              const containerRect = scrollContainer.getBoundingClientRect();
+              const messageRect = messageElement.getBoundingClientRect();
+              
+              // Calculate scroll position to place message at top of container
+              const currentScrollTop = scrollContainer.scrollTop;
+              const messageTopRelativeToContainer = messageRect.top - containerRect.top + currentScrollTop;
+              const targetScrollTop = messageTopRelativeToContainer - 20; // 20px padding from top
+              
+              scrollContainer.scrollTo({
+                top: Math.max(0, targetScrollTop),
+                behavior: 'smooth'
+              });
+            }
+            
+            // Also scroll the page to ensure it's visible (especially on mobile)
+            messageElement.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start',
+              inline: 'nearest'
+            });
+          }
         }
       }, 100);
     }
@@ -309,9 +324,11 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ messages, setMessages }) 
         {messages.map((m, i) => {
           const isLastModelMessage = m.role === 'model' && i === messages.length - 1;
           const isLastUserMessage = m.role === 'user' && i === messages.length - 1;
+          const questionAnchorId = m.role === 'user' ? `question-${i}-${m.timestamp.getTime()}` : undefined;
           return (
             <div 
-              key={i} 
+              key={i}
+              id={questionAnchorId}
               ref={isLastModelMessage ? lastModelMessageRef : isLastUserMessage ? lastUserMessageRef : null}
               className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'} animate-fadeIn relative`}
             >

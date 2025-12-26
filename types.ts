@@ -5,6 +5,7 @@ export enum View {
   RESONANCE_CHECK = 'resonance_check',
   ABOUT_CONTACT = 'about_contact',
   MANIFEST = 'manifest',
+  FAQ = 'faq',
   ROSETTA_STONE = 'rosetta_stone'
 }
 

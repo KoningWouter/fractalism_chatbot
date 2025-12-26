@@ -6,6 +6,7 @@ import AxiomLibrary from './components/AxiomLibrary';
 import ResonanceCheck from './components/ResonanceCheck';
 import AboutContact from './components/AboutContact';
 import Manifest from './components/Manifest';
+import FAQ from './components/FAQ';
 import FractalBackground from './components/FractalBackground';
 
 const STORAGE_KEY = 'fractale-gids-chat-messages';
@@ -110,6 +111,7 @@ const App: React.FC = () => {
               <NavItem view={View.LIBRARY} label="Bibliotheek" icon="◚" />
               <NavItem view={View.RESONANCE_CHECK} label="Check" icon="⌂" />
               <NavItem view={View.MANIFEST} label="Manifest" icon="◷" />
+              <NavItem view={View.FAQ} label="FAQ" icon="?" />
               <NavItem view={View.ABOUT_CONTACT} label="Over" icon="ℹ" />
             </nav>
           </div>
@@ -122,11 +124,12 @@ const App: React.FC = () => {
 
       {/* Mobile Nav with Glassmorphism - Moved to top */}
       <div className="md:hidden h-20 border-b border-[#D4AF37]/20 glass-strong shrink-0 z-30 relative">
-        <nav className="grid grid-cols-5 h-full">
+        <nav className="grid grid-cols-6 h-full">
           <NavItem view={View.CHAT} label="Gids" icon="◈" />
           <NavItem view={View.LIBRARY} label="Code" icon="◚" />
           <NavItem view={View.RESONANCE_CHECK} label="Check" icon="⌂" />
           <NavItem view={View.MANIFEST} label="Manifest" icon="◷" />
+          <NavItem view={View.FAQ} label="FAQ" icon="?" />
           <NavItem view={View.ABOUT_CONTACT} label="Over" icon="ℹ" />
         </nav>
       </div>
@@ -140,6 +143,7 @@ const App: React.FC = () => {
             {currentView === View.LIBRARY && <AxiomLibrary />}
             {currentView === View.RESONANCE_CHECK && <ResonanceCheck />}
             {currentView === View.MANIFEST && <Manifest />}
+            {currentView === View.FAQ && <FAQ />}
             {currentView === View.ABOUT_CONTACT && <AboutContact />}
           </div>
         </div>

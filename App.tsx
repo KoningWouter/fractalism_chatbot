@@ -149,6 +149,15 @@ const App: React.FC = () => {
         </div>
       </main>
 
+      {/* Footer */}
+      <footer className="border-t border-[#D4AF37]/20 glass-strong shrink-0 z-30 relative">
+        <div className="w-full max-w-7xl mx-auto px-4 md:px-8 py-6">
+          <p className="text-center text-[#708090]/70 text-sm font-mono">
+            © 2025 Fractalisme.nl – Herstel het patroon, vind je flow.
+          </p>
+        </div>
+      </footer>
+
     </div>
   );
 };

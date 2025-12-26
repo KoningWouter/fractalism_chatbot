@@ -34,6 +34,66 @@ const AboutContact: React.FC = () => {
         <p className="text-[#708090]/70 font-mono text-sm uppercase tracking-wider relative z-10">De Fractale Gids</p>
       </section>
 
+      {/* Mission Section */}
+      <section className="space-y-8">
+        <div className="glass-strong border border-[#D4AF37]/30 rounded-3xl p-8 md:p-10 luxury-glow-sm relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 opacity-5 pointer-events-none">
+            <svg viewBox="0 0 200 200" className="w-full h-full fractal-particle" style={{animationDelay: '0.5s'}}>
+              <path d="M 100 10 L 190 100 L 100 190 L 10 100 Z" fill="none" stroke="url(#aboutGold)" strokeWidth="1"/>
+              <path d="M 100 40 L 160 100 L 100 160 L 40 100 Z" fill="none" stroke="url(#aboutPurple)" strokeWidth="0.8"/>
+              <path d="M 100 70 L 130 100 L 100 130 L 70 100 Z" fill="none" stroke="url(#aboutBlue)" strokeWidth="0.6"/>
+            </svg>
+          </div>
+          
+          <div className="relative z-10 space-y-8">
+            <div>
+              <h3 className="text-3xl md:text-4xl font-display font-bold text-[#D4AF37] mb-6">Onze Missie: Jouw Pad Terug naar Fractale Harmonie</h3>
+              <p className="text-slate-200 leading-relaxed text-lg mb-4">
+                Welkom bij Fractalisme.nl. Mijn missie is om een helder en praktisch kader te bieden voor de complexiteit van het menselijk leven. We leven in een wereld die vaak chaotisch en overweldigend voelt, maar wie beter kijkt, ziet dat alles — van de kleinste cel tot de grootste sterrenstelsels — verbonden is door herhalende, fractale patronen.
+              </p>
+            </div>
+
+            <div className="pt-6 border-t border-[#708090]/20">
+              <h4 className="text-2xl font-display font-semibold text-[#D4AF37] mb-4">Waarom Fractalisme?</h4>
+              <p className="text-slate-200 leading-relaxed mb-4">
+                Veel mensen ervaren een constante strijd. We voelen frictie in ons werk, spanning in onze relaties en een gebrek aan richting. In de filosofie van het Fractalisme begrijpen we dat dit geen toeval is. Het is het resultaat van de <strong className="text-[#D4AF37]">Wet van Fractale Afwijking (Axioma 8)</strong>. Wanneer wij onze vrije wil gebruiken om buiten onze natuurlijke resonantie te treden, ontstaat er onvermijdelijk weerstand.
+              </p>
+              <p className="text-slate-200 leading-relaxed text-lg font-semibold italic text-[#D4AF37]">
+                Mijn doel is om je te helpen deze weerstand niet langer te zien als een obstakel, maar als een wegwijzer.
+              </p>
+            </div>
+
+            <div className="pt-6 border-t border-[#708090]/20">
+              <h4 className="text-2xl font-display font-semibold text-[#D4AF37] mb-4">Wat ik voor je wil bereiken</h4>
+              <p className="text-slate-200 leading-relaxed mb-4">
+                Door het verspreiden van de fractale gids en de onderliggende axioma's, wil ik een beweging in gang zetten van 'moeite' naar 'moeiteloosheid'. Ik geloof dat:
+              </p>
+              <ul className="space-y-4 ml-6">
+                <li className="text-slate-200 leading-relaxed flex items-start">
+                  <span className="text-[#D4AF37] mr-3 font-bold text-xl">•</span>
+                  <span><strong className="text-[#D4AF37]">Inzicht leidt tot rust:</strong> Wanneer je de <strong className="text-[#708090]">Elastische Correctie (Axioma 9)</strong> leert herkennen, begrijp je waarom bepaalde patronen zich in je leven herhalen.</span>
+                </li>
+                <li className="text-slate-200 leading-relaxed flex items-start">
+                  <span className="text-[#D4AF37] mr-3 font-bold text-xl">•</span>
+                  <span><strong className="text-[#D4AF37]">Flow een keuze is:</strong> Door je keuzes af te stemmen op het universele patroon, verdwijnt de frictie en ontstaat er ruimte voor echte groei.</span>
+                </li>
+                <li className="text-slate-200 leading-relaxed flex items-start">
+                  <span className="text-[#D4AF37] mr-3 font-bold text-xl">•</span>
+                  <span><strong className="text-[#D4AF37]">Harmonie de natuurlijke staat is:</strong> We zijn niet bedoeld om te lijden; we zijn bedoeld om te resoneren met het geheel.</span>
+                </li>
+              </ul>
+            </div>
+
+            <div className="pt-6 border-t border-[#708090]/20">
+              <h4 className="text-2xl font-display font-semibold text-[#D4AF37] mb-4">De autoriteit achter de gids</h4>
+              <p className="text-slate-200 leading-relaxed">
+                Fractalisme is ontstaan uit een diepe observatie van de wetmatigheden van het universum en de vertaling daarvan naar het dagelijks leven. Het is mijn passie om deze abstracte wetten om te zetten in concrete handvaten voor iedereen die op zoek is naar zingeving, balans en een dieper begrip van hun eigen plek in het grote geheel.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* About Section */}
       <section className="space-y-8">
         <div className="glass-strong border border-[#708090]/30 rounded-3xl p-8 md:p-10 luxury-glow-sm relative overflow-hidden">

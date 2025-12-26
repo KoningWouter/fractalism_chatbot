@@ -1,30 +1,56 @@
 
 import React, { useState } from 'react';
+import { View } from '../types';
 
 interface FAQItem {
   question: string;
-  answer: string;
+  answer: string | React.ReactNode;
 }
 
-const FAQ: React.FC = () => {
+interface FAQProps {
+  onNavigate?: (view: View) => void;
+}
+
+const FAQ: React.FC<FAQProps> = ({ onNavigate }) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const faqs: FAQItem[] = [
     {
-      question: "Wat is de Fractale Gids?",
-      answer: "De Fractale Gids is een filosofisch raamwerk gebaseerd op de wetten van resonantie en fractale patronen. Het helpt je navigeren door keuzestress en lijden door je positie in het universele patroon te herstellen."
+      question: "Wat is de Fractale Gids en hoe helpt het bij persoonlijke groei?",
+      answer: (
+        <>
+          De Fractale Gids is een praktisch kompas voor iedereen die op zoek is naar meer balans en richting in een chaotische wereld. In plaats van symptomen te bestrijden, helpt deze gids je om de onderliggende fractale patronen in je leven te zien.
+          <br /><br />
+          Door gebruik te maken van de{' '}
+          <button
+            onClick={() => onNavigate?.(View.RESONANCE_CHECK)}
+            className="text-[#D4AF37] hover:text-[#E5C158] underline font-semibold transition-colors duration-300"
+          >
+            Resonantie Check
+          </button>
+          {' '}en de fundamentele Axioma's, leer je precies waar je onbewust tegen het patroon in beweegt. De gids biedt handvaten om de 'elastische spanning' in je leven te verlagen. Of je nu kampt met keuzestress, een gebrek aan zingeving of professionele blokkades, de Fractale Gids helpt je om je vrije wil zo te gebruiken dat deze weer resoneert met het grotere geheel. Zo transformeer je moeite naar moeiteloosheid.
+        </>
+      )
     },
     {
       question: "Hoe gebruik ik de Fractale Gids?",
       answer: "Je kunt de Fractale Gids gebruiken door vragen te stellen in de Dialoog, de Axioma's te bestuderen in de Bibliotheek, of je resonantie te checken met de Resonantie Check tool."
     },
     {
-      question: "Wat zijn Axioma's?",
+      question: "Wat zijn de universele wetten (Axioma's) van het Fractalisme?",
       answer: "Axioma's zijn de fundamentele principes van het fractale denken. Ze vormen de basis van het systeem en helpen je patronen te herkennen in je eigen leven."
     },
     {
-      question: "Wat is resonantie?",
+      question: "Wat is fractale resonantie en hoe beïnvloedt dit mijn geluk?",
       answer: "Resonantie is het principe waarbij gelijksoortige patronen elkaar versterken. Door je resonantie te verhogen, kom je in flow en vermindert lijden."
+    },
+    {
+      question: "Hoe kom ik weer in een 'flow'?",
+      answer: "Om weer in een flow te komen, is het essentieel om je optimale fractale resonantie te herstellen. Volgens de Wet van Fractale Afwijking (Axioma 8) ontstaat frictie wanneer we onze vrije wil gebruiken om tegen het universele patroon in te gaan. Door dit patroon weer te volgen, verdwijnt de weerstand."
+    },
+    {
+      question: "Waarom ervaar ik frictie en lijden in mijn leven?",
+      answer: "Het ervaren van frictie, weerstand of lijden is binnen het Fractalisme geen toeval, maar een essentieel signaal. Volgens Axioma 8 (De Wet van Fractale Afwijking) beschikken we over de vrije wil om af te wijken van onze optimale fractale resonantie. Wanneer we keuzes maken die niet in lijn liggen met het universele patroon, ontstaat er frictie.\n\nDit proces wordt versterkt door Axioma 9 (De Elastische Correctie). Hoe verder je afwijkt van je natuurlijke pad, hoe groter de spanning en de corrigerende kracht van het universum worden. Dit voelt vaak als lijden of 'tegen de stroom in zwemmen'. Het doel van deze frictie is niet om je te straffen, maar om je via een elastische correctie terug te duwen naar een staat van harmonie en flow. Door deze patronen te herkennen, kun je de weerstand verminderen en je weer verbinden met je eigen resonantie."
     },
     {
       question: "Hoe werkt de Resonantie Check?",
@@ -32,10 +58,10 @@ const FAQ: React.FC = () => {
     },
     {
       question: "Is de Fractale Gids een religie?",
-      answer: "Nee, de Fractale Gids is een filosofisch en praktisch raamwerk. Het is een manier van kijken naar de wereld en je eigen positie daarin, zonder religieuze verplichtingen."
+      answer: "Nee, de Fractale Gids en het Fractalisme zijn geen religie. Er is geen sprake van aanbidding, dogma's of een opgelegde moraal. In plaats daarvan is het een filosofisch kader en een praktische methodiek die gebaseerd is op het observeren van patronen in de natuur en het universum.\n\nWaar religies vaak vragen om geloof, vraagt het Fractalisme om waarneming. De wetten, zoals de Wet van Fractale Afwijking (Axioma 8), zijn bedoeld als instrumenten om je eigen werkelijkheid te toetsen. Je hoeft niet in de Elastische Correctie (Axioma 9) te 'geloven' om de frictie te voelen wanneer je tegen je eigen natuurlijke ritme in gaat.\n\nHet Fractalisme slaat een brug tussen wetenschappelijke concepten (zoals fractale structuren) en persoonlijke levensvragen. Het is een gereedschapskist voor zelfonderzoek. Of je nu een religieuze, atheïstische of agnostische achtergrond hebt: de Fractale Gids is universeel toepasbaar omdat het simpelweg kijkt naar de resonantie tussen het individu en het grotere geheel. Het doel is niet bekering, maar het bereiken van een staat van flow en harmonie door inzicht in je eigen patronen."
     },
     {
-      question: "Kan ik de Fractale Gids gebruiken voor specifieke problemen?",
+      question: "Helpt de Fractale Gids bij stress, burn-out of keuzestress?",
       answer: "Ja, de Fractale Gids is ontworpen om te helpen bij allerlei vormen van frictie en keuzestress. Stel je vraag in de Dialoog en de Gids zal je begeleiden."
     },
     {
@@ -103,9 +129,13 @@ const FAQ: React.FC = () => {
             >
               <div className="px-6 md:px-8 pb-6 md:pb-8 pt-0">
                 <div className="border-t border-[#708090]/20 pt-6">
-                  <p className="text-slate-200 leading-relaxed text-sm md:text-base">
-                    {faq.answer}
-                  </p>
+                  <div className="text-slate-200 leading-relaxed text-sm md:text-base">
+                    {typeof faq.answer === 'string' ? (
+                      <p style={{ whiteSpace: 'pre-wrap' }}>{faq.answer}</p>
+                    ) : (
+                      faq.answer
+                    )}
+                  </div>
                 </div>
               </div>
             </div>

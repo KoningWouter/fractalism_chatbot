@@ -143,7 +143,7 @@ const App: React.FC = () => {
             {currentView === View.LIBRARY && <AxiomLibrary />}
             {currentView === View.RESONANCE_CHECK && <ResonanceCheck />}
             {currentView === View.MANIFEST && <Manifest />}
-            {currentView === View.FAQ && <FAQ />}
+            {currentView === View.FAQ && <FAQ onNavigate={setCurrentView} />}
             {currentView === View.ABOUT_CONTACT && <AboutContact />}
           </div>
         </div>

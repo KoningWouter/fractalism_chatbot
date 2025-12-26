@@ -42,6 +42,91 @@ const ResonanceCheck: React.FC = () => {
         <p className="text-[#708090]/80 font-mono text-sm uppercase tracking-wider relative z-10">Meet je huidige afwijking van het optimale fractale pad</p>
       </div>
 
+      {/* Information Section */}
+      <div className="glass-strong border border-[#708090]/30 rounded-3xl p-8 md:p-10 space-y-8 luxury-glow-sm relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-64 h-64 opacity-5 pointer-events-none">
+          <svg viewBox="0 0 200 200" className="w-full h-full fractal-particle" style={{animationDelay: '1s'}}>
+            <path d="M 100 10 L 190 100 L 100 190 L 10 100 Z" fill="none" stroke="url(#resGold)" strokeWidth="1"/>
+            <path d="M 100 40 L 160 100 L 100 160 L 40 100 Z" fill="none" stroke="url(#resSlate)" strokeWidth="0.8"/>
+            <path d="M 100 70 L 130 100 L 100 130 L 70 100 Z" fill="none" stroke="url(#resGold)" strokeWidth="0.6"/>
+          </svg>
+        </div>
+
+        <div className="relative z-10 space-y-6">
+          <div>
+            <h3 className="text-2xl md:text-3xl font-display font-bold text-[#D4AF37] mb-4">Resonantie Check: Meet de Flow en Frictie in je Leven</h3>
+            <p className="text-slate-200 leading-relaxed text-base md:text-lg">
+              Voel je je momenteel in een 'flow', of heb je het gevoel dat je voortdurend tegen de stroom in zwemt? De Resonantie Check helpt je te ontdekken in hoeverre jouw keuzes resoneren met je natuurlijke fractale patroon.
+            </p>
+          </div>
+
+          <div>
+            <h4 className="text-xl font-display font-semibold text-[#D4AF37] mb-3">Waarom een Resonantie Check doen?</h4>
+            <p className="text-slate-200 leading-relaxed">
+              Iedereen ervaart wel eens periodes van tegenslag, stress of vermoeidheid. In de fractale filosofie noemen we dit frictie. Deze frictie is geen toeval, maar een essentieel signaal van het universum. Met deze check brengen we in kaart waar de spanning zich bevindt en hoe je deze kunt oplossen.
+            </p>
+          </div>
+
+          <div>
+            <h4 className="text-xl font-display font-semibold text-[#D4AF37] mb-3">Wat meet de check?</h4>
+            <p className="text-slate-200 leading-relaxed mb-3">
+              De Resonantie Check kijkt naar de balans tussen jouw vrije wil en de optimale fractale resonantie. We analyseren drie kerngebieden:
+            </p>
+            <ul className="space-y-2 text-slate-200 ml-6 list-disc">
+              <li><strong className="text-[#D4AF37]">Interactie met je omgeving:</strong> Ervaar je harmonie of constante weerstand in je relaties en werk?</li>
+              <li><strong className="text-[#D4AF37]">Innerlijke Rust:</strong> In hoeverre is er sprake van mentale spanning (de 'elastische druk')?</li>
+              <li><strong className="text-[#D4AF37]">Flow-frequentie:</strong> Hoe vaak gaan dingen 'als vanzelf' vergeleken met taken die veel moeite kosten?</li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-xl font-display font-semibold text-[#D4AF37] mb-3">De Wet van Afwijking en Correctie</h4>
+            <p className="text-slate-200 leading-relaxed mb-3">
+              Tijdens de check passen we twee fundamentele wetten toe op jouw huidige situatie:
+            </p>
+            <div className="space-y-3 ml-6">
+              <div>
+                <p className="text-slate-200 leading-relaxed">
+                  <strong className="text-[#D4AF37]">1. Axioma 8 (De Wet van Fractale Afwijking)</strong> We onderzoeken waar jij je vrije wil hebt gebruikt om af te wijken van het pad dat voor jou de minste weerstand biedt. Deze afwijking is de bron van de moeite en het lijden dat je nu ervaart.
+                </p>
+              </div>
+              <div>
+                <p className="text-slate-200 leading-relaxed">
+                  <strong className="text-[#D4AF37]">2. Axioma 9 (De Elastische Correctie)</strong> We meten de hoogte van de tegendruk. Hoe groter de afwijking, hoe groter de corrigerende kracht van het universum. De Resonantie Check laat zien hoe je deze spanning kunt ontladen voordat de 'elastiek' hardhandig terugschiet naar het midden.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h4 className="text-xl font-display font-semibold text-[#D4AF37] mb-3">Wat betekent jouw score?</h4>
+            <div className="space-y-4">
+              <div className="glass border border-[#D4AF37]/30 rounded-2xl p-5">
+                <p className="text-slate-200 leading-relaxed">
+                  <strong className="text-[#D4AF37]">Hoge Resonantie (Flow)</strong> Je bevindt je in een staat van 'Flow'. Je acties zijn in lijn met het grotere patroon. <strong className="text-[#D4AF37]">Actie:</strong> Behoud je focus en blijf dit pad volgen.
+                </p>
+              </div>
+              <div className="glass border border-[#708090]/30 rounded-2xl p-5">
+                <p className="text-slate-200 leading-relaxed">
+                  <strong className="text-[#708090]">Lichte Frictie (Moeite)</strong> Kleine afwijkingen zorgen voor onnodige moeite en vermoeidheid. Je wijkt iets af van je resonantie. <strong className="text-[#708090]">Actie:</strong> Gebruik de Fractale Gids voor kleine koerscorrecties.
+                </p>
+              </div>
+              <div className="glass border border-red-500/30 rounded-2xl p-5">
+                <p className="text-slate-200 leading-relaxed">
+                  <strong className="text-red-400">Hoge Spanning (Lijden)</strong> De Elastische Correctie is momenteel zeer actief. Je ervaart veel weerstand of tegenslag. <strong className="text-red-400">Actie:</strong> Onmiddellijke reflectie is nodig om verdere frictie te voorkomen en de spanning te ontladen.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="glass border border-[#D4AF37]/40 rounded-2xl p-6 text-center luxury-glow-sm">
+            <p className="text-[#D4AF37] italic text-lg md:text-xl leading-relaxed font-display">
+              "Frictie is de taal van het universum die je vertelt dat je niet op je plek bent. Luisteren naar die taal is het begin van wijsheid."
+            </p>
+          </div>
+        </div>
+      </div>
+
       <div className="glass-strong border border-[#708090]/30 rounded-3xl p-8 md:p-10 space-y-10 luxury-glow-sm relative overflow-hidden">
         {/* Fractal background decoration */}
         <div className="absolute top-0 right-0 w-64 h-64 opacity-5 pointer-events-none">

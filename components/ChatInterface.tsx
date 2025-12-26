@@ -29,33 +29,18 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ messages, setMessages }) 
             // Update the URL hash for browser navigation
             window.location.hash = anchorId;
             
-            // Scroll to the anchor - works for both desktop and mobile
-            // First scroll the container, then the page
-            if (scrollRef.current) {
-              const scrollContainer = scrollRef.current;
-              const containerRect = scrollContainer.getBoundingClientRect();
-              const messageRect = messageElement.getBoundingClientRect();
-              
-              // Calculate scroll position to place message at top of container
-              const currentScrollTop = scrollContainer.scrollTop;
-              const messageTopRelativeToContainer = messageRect.top - containerRect.top + currentScrollTop;
-              const targetScrollTop = messageTopRelativeToContainer - 20; // 20px padding from top
-              
-              scrollContainer.scrollTo({
-                top: Math.max(0, targetScrollTop),
-                behavior: 'smooth'
-              });
-            }
+            // Calculate the position to scroll to (element top minus any offset)
+            const elementTop = messageElement.getBoundingClientRect().top + window.pageYOffset;
+            const offset = 20; // Small padding from top
             
-            // Also scroll the page to ensure it's visible (especially on mobile)
-            messageElement.scrollIntoView({
-              behavior: 'smooth',
-              block: 'start',
-              inline: 'nearest'
+            // Smooth scroll the page to position the element at the top of the viewport
+            window.scrollTo({
+              top: elementTop - offset,
+              behavior: 'smooth'
             });
           }
         }
-      }, 100);
+      }, 150);
     }
   }, [messages]);
 

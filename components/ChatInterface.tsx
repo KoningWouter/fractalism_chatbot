@@ -15,17 +15,31 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ messages, setMessages }) 
   const lastModelMessageRef = useRef<HTMLDivElement>(null);
   const lastUserMessageRef = useRef<HTMLDivElement>(null);
 
-  // Scroll to the last user message (question) when it's sent
+  // Scroll to show the last user message (question) at the top when it's sent
   useEffect(() => {
     const lastMessage = messages[messages.length - 1];
-    if (lastMessage && lastMessage.role === 'user' && lastUserMessageRef.current) {
+    if (lastMessage && lastMessage.role === 'user' && lastUserMessageRef.current && scrollRef.current) {
       // Use setTimeout to ensure the DOM has updated
       setTimeout(() => {
-        lastUserMessageRef.current?.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start',
-          inline: 'nearest'
-        });
+        if (lastUserMessageRef.current && scrollRef.current) {
+          const scrollContainer = scrollRef.current;
+          const messageElement = lastUserMessageRef.current;
+          
+          // Calculate the scroll position to place the message at the top of the container
+          const containerRect = scrollContainer.getBoundingClientRect();
+          const messageRect = messageElement.getBoundingClientRect();
+          
+          // Calculate how much we need to scroll
+          // Current scroll position + difference between message and container top positions
+          const currentScrollTop = scrollContainer.scrollTop;
+          const messageTopRelativeToContainer = messageRect.top - containerRect.top + currentScrollTop;
+          const targetScrollTop = messageTopRelativeToContainer - 20; // 20px padding from top
+          
+          scrollContainer.scrollTo({
+            top: Math.max(0, targetScrollTop),
+            behavior: 'smooth'
+          });
+        }
       }, 100);
     }
   }, [messages]);

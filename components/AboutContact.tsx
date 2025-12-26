@@ -226,10 +226,13 @@ const AboutContact: React.FC = () => {
             <div className="space-y-6">
               <div>
                 <p className="text-slate-300/90 leading-relaxed text-lg mb-4">
-                  Deze website en servers worden zelf betaald uit vertrouwen dat het universum zorgt dat het betaald kan worden. Het Fractalisme leert ons dat wanneer we handelen in resonantie met het patroon, de middelen zich manifesteren.
+                  Alles in het universum is een uitwisseling van energie. De inzichten die je hier vindt, zijn bedoeld om jouw frictie te verlagen en je resolutie te verhogen – om je te helpen navigeren door de complexe formule van het leven.
                 </p>
-                <p className="text-slate-300/80 leading-relaxed mb-6">
-                  Als je waarde vindt in deze gids en wilt bijdragen aan het voortbestaan en de groei van dit project, kun je een donatie doen via Bitcoin of Buy Me a Coffee.
+                <p className="text-slate-300/90 leading-relaxed text-lg mb-4">
+                  Ik die deze Gids bouw, heb zelf de diepste frictie van armoede en zwaarte gekend. Mijn doel is simpel: de wereld de code geven om vrijer te ademen. Jouw bijdrage is de brandstof voor dit project. Het stelt mij in staat om de techniek achter dit platform te verbeteren, de wijsheid verder te verspreiden en – op een heel menselijk niveau – de cirkel van tekort in mijn eigen leven eindelijk te doorbreken.
+                </p>
+                <p className="text-slate-300/90 leading-relaxed text-lg mb-6">
+                  Wanneer je doneert, doe je meer dan geld geven; je bevestigt dat de flow is hersteld. Je helpt een systeem groeien dat gebouwd is op waarheid, ratio en eenheid.
                 </p>
               </div>
 

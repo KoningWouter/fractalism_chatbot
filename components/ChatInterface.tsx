@@ -289,7 +289,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ messages, setMessages }) 
 
     // Create history from current messages only (without the new user message)
     // The userMessage will be added separately in getGidsResponse
-    const history = messages.map(m => ({ role: m.role, text: m.text }));
+    // Only send the last 10 messages to keep context manageable
+    const history = messages.slice(-10).map(m => ({ role: m.role, text: m.text }));
     const responseText = await getGidsResponse(userInput, history);
     
     const modelMsg: Message = { role: 'model', text: responseText || '...', timestamp: new Date() };

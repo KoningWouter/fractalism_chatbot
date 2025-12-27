@@ -15,6 +15,14 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ messages, setMessages }) 
   const lastModelMessageRef = useRef<HTMLDivElement>(null);
   const lastUserMessageRef = useRef<HTMLDivElement>(null);
 
+  // Scroll chat container to bottom on load and when new messages arrive
+  useEffect(() => {
+    if (scrollRef.current) {
+      // Scroll to bottom of chat container
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  }, [messages, isLoading]);
+
   // Scroll to the anchor of the last user message (question) when it's sent
   useEffect(() => {
     const lastMessage = messages[messages.length - 1];

@@ -15,38 +15,50 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ messages, setMessages }) 
   const lastModelMessageRef = useRef<HTMLDivElement>(null);
   const lastUserMessageRef = useRef<HTMLDivElement>(null);
 
-  // Scroll chat container to bottom on load and when new messages arrive
+  // Scroll chat container to the last user message (question) on load and when new user message is posted
   useEffect(() => {
-    if (scrollRef.current) {
-      // Scroll to bottom of chat container
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-    }
-  }, [messages, isLoading]);
-
-  // Scroll to the anchor of the last user message (question) when it's sent
-  useEffect(() => {
-    const lastMessage = messages[messages.length - 1];
-    if (lastMessage && lastMessage.role === 'user' && lastUserMessageRef.current) {
+    // Find the last user message
+    const lastUserMessageIndex = messages.map((m, i) => m.role === 'user' ? i : -1).filter(i => i !== -1).pop();
+    
+    if (lastUserMessageIndex !== undefined && scrollRef.current) {
       // Use setTimeout to ensure the DOM has updated
       setTimeout(() => {
-        if (lastUserMessageRef.current) {
-          const messageElement = lastUserMessageRef.current;
-          const anchorId = messageElement.id;
+        if (scrollRef.current) {
+          // Find the user message element by its anchor ID
+          const userMessage = messages[lastUserMessageIndex];
+          const anchorId = `question-${lastUserMessageIndex}-${userMessage.timestamp.getTime()}`;
+          const messageElement = document.getElementById(anchorId);
           
-          if (anchorId) {
+          if (messageElement && scrollRef.current) {
             // Update the URL hash for browser navigation
             window.location.hash = anchorId;
             
-            // Calculate the position to scroll to (element top minus any offset)
-            const elementTop = messageElement.getBoundingClientRect().top + window.pageYOffset;
-            const offset = 20; // Small padding from top
+            // Calculate the position to scroll within the container
+            const container = scrollRef.current;
+            const containerRect = container.getBoundingClientRect();
+            const messageRect = messageElement.getBoundingClientRect();
             
-            // Smooth scroll the page to position the element at the top of the viewport
-            window.scrollTo({
-              top: elementTop - offset,
+            // Calculate scroll position to place message at top of container (with 20px padding)
+            const scrollTop = container.scrollTop;
+            const messageTopRelativeToContainer = messageRect.top - containerRect.top + scrollTop;
+            const targetScrollTop = messageTopRelativeToContainer - 20;
+            
+            // Scroll the container to the message
+            container.scrollTo({
+              top: Math.max(0, targetScrollTop),
               behavior: 'smooth'
             });
+          } else if (scrollRef.current) {
+            // Fallback: scroll to bottom if element not found
+            scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
           }
+        }
+      }, 150);
+    } else if (scrollRef.current && messages.length > 0) {
+      // If no user messages, scroll to bottom
+      setTimeout(() => {
+        if (scrollRef.current) {
+          scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
         }
       }, 150);
     }

@@ -280,7 +280,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ messages, setMessages }) 
   return (
     <div className="flex flex-col h-full max-w-7xl mx-auto px-4 md:px-8 py-12 page-transition">
       {/* Fractal Header Decoration */}
-      <div className="text-center mb-12 relative">
+      <div className="text-center mb-12 relative shrink-0">
         <div className="absolute inset-0 flex items-center justify-center opacity-8">
           <svg width="200" height="200" viewBox="0 0 200 200" className="fractal-particle">
             <circle cx="100" cy="100" r="80" fill="none" stroke="url(#chatGold)" strokeWidth="1"/>
@@ -304,7 +304,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ messages, setMessages }) 
 
       <div 
         ref={scrollRef}
-        className="flex-1 overflow-y-auto overflow-x-visible space-y-4 pt-4 pb-4 px-2"
+        className="overflow-y-auto overflow-x-visible space-y-4 pt-4 pb-4 px-2"
+        style={{ maxHeight: 'calc(100vh - 400px)', minHeight: '300px' }}
       >
         {messages.map((m, i) => {
           const isLastModelMessage = m.role === 'model' && i === messages.length - 1;
@@ -348,7 +349,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ messages, setMessages }) 
         )}
       </div>
 
-      <div className="p-4 md:p-6 border-t border-[#D4AF37]/20 glass-strong sticky bottom-0 rounded-t-3xl mt-6">
+      <div className="p-4 md:p-6 border-t border-[#D4AF37]/20 glass-strong sticky bottom-0 rounded-t-3xl mt-6 shrink-0">
         <div className="flex gap-2 md:gap-3 items-stretch">
           <input
             type="text"
